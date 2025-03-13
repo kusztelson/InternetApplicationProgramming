@@ -10,7 +10,7 @@ export class HelloService {
 
   constructor(private http: HttpClient) { }
 
-  public getHello(): Observable<String> {
-    return this.http.get<String>(environment.apiUrl + "hello")
+  public getHello(): Observable<any> {
+    return this.http.get(environment.apiUrl + "hello", {responseType: "text" })
   }
 }
