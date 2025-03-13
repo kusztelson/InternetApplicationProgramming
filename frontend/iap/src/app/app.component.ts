@@ -12,12 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'iap';
-  hello?: Observable<String>;
+  hello$?: Observable<String>;
 
   constructor(private helloService: HelloService) {
   }
 
   ngOnInit(): void {
-    this.hello = this.helloService.getHello()
+    this.hello$ = this.helloService.getHello()
   }
 }
