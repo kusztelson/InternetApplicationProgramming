@@ -12,7 +12,7 @@
 - Run maven -> lifecycle -> compile from your IDE
   - It will download required Java dependencies defined in pom.xml
   - Run Spring backend by running `main` method in `IapApplication`
-- Go to ./frontend/iap folder and run npm install
+- Go to ./frontend/iap folder and run `npm install`
   - It will download required Node dependencies defined in package.json
   - In the same folder run `ng serve` command
 - Go to localhost:4200 in your browser
