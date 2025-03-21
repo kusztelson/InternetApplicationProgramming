@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-IapApplication<iap>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "pl.lodz.p.iap.IapApplication",
+            "projectName": "iap",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
