@@ -7,15 +7,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Car")
-public class User {
+@Table(name = "RentUser")
+public class RentUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-	String login;
-	String password;
-	String name;
-	String surname;
+    private long id;
+	private String login;
+	private String password;
+	private String name;
+	private String surname;
     
     public long getId() {
         return id;

@@ -19,6 +19,12 @@ public class SecurityConfig {
                     .requestMatchers("/hello").permitAll()  // Allow everyone to access /hello
                     .requestMatchers("/h2-console/**").permitAll()  // Allow everyone to access /h2-console
                     .requestMatchers("/favicon.ico").permitAll()
+                    .requestMatchers("/rentUsers/**").permitAll()
+                    .requestMatchers("/addRentUser").permitAll()
+                    .requestMatchers("/reservations/**").permitAll()
+                    .requestMatchers("/addReservation").permitAll()
+                    .requestMatchers("/cars/**").permitAll()
+                    .requestMatchers("/addCar").permitAll()
                     .anyRequest().authenticated()       // Secure all other endpoints
             )
             .csrf(AbstractHttpConfigurer::disable)

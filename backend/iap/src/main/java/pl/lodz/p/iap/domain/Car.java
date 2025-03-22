@@ -1,5 +1,6 @@
 package pl.lodz.p.iap.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,10 +12,12 @@ import jakarta.persistence.Table;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-	String name;
-    String picture;
-	float price_per_day;
+    private long id;
+	private String name;
+    private String picture;
+
+    @Column(name = "price_per_day")
+	private float pricePerDay;
     
     public long getId() {
         return id;
@@ -34,10 +37,10 @@ public class Car {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-    public float getPrice_per_day() {
-        return price_per_day;
+    public float getPricePerDay() {
+        return pricePerDay;
     }
-    public void setPrice_per_day(float price_per_day) {
-        this.price_per_day = price_per_day;
+    public void setPricePerDay(float pricePerDay) {
+        this.pricePerDay = pricePerDay;
     }
 }

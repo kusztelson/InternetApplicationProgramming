@@ -2,12 +2,12 @@ package pl.lodz.p.iap.service;
 
 import java.util.List;
 
-import pl.lodz.p.iap.domain.User;
+import pl.lodz.p.iap.domain.RentUser;
 
 public interface UserService {
-    public void addUser(User user);
-    public void editUser(User user);
-    public List<User> listUser();
+    public void addUser(RentUser user);
+    public void editUser(RentUser user);
+    public List<RentUser> listUser();
     public void deleteUser(long id);
-    public User getUser(long id);
+    public RentUser getUser(long id);
 }

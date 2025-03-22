@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import pl.lodz.p.iap.domain.Car;
 import pl.lodz.p.iap.domain.Reservation;
-import pl.lodz.p.iap.domain.User;
+import pl.lodz.p.iap.domain.RentUser;
 import pl.lodz.p.iap.repository.CarRepository;
 import pl.lodz.p.iap.repository.ReservationRepository;
 import pl.lodz.p.iap.repository.UserRepository;
@@ -56,7 +56,7 @@ public class DataBaseServicesImpl implements CarService, UserService, Reservatio
     // USER REPOSITORY IMPLEMENTATION
 
     @Transactional
-    public void addUser(User user) {
+    public void addUser(RentUser user) {
         userRepository.save(user);
     }
 
@@ -66,17 +66,17 @@ public class DataBaseServicesImpl implements CarService, UserService, Reservatio
     }
 
     @Transactional
-    public void editUser(User user) {
+    public void editUser(RentUser user) {
         userRepository.save(user);
     }
 
     @Transactional
-    public User getUser(long id) {
+    public RentUser getUser(long id) {
         return userRepository.findById(id);
     }
 
     @Transactional
-    public List<User> listUser() {
+    public List<RentUser> listUser() {
         return userRepository.findAll();
     }
 

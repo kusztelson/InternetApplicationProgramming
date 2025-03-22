@@ -1,6 +1,6 @@
 package pl.lodz.p.iap.repository;
 
-import pl.lodz.p.iap.domain.User;
+import pl.lodz.p.iap.domain.RentUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    List<User> findByName(String name);
-    User findById(long id);
+public interface UserRepository extends JpaRepository<RentUser, Long> {
+    List<RentUser> findByName(String name);
+    RentUser findById(long id);
 }

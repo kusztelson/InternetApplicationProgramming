@@ -2,22 +2,35 @@ package pl.lodz.p.iap.domain;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Car")
+@Table(name = "Reservation")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-	long car_id;
-	long user_id;
-	Date start_date;
-	Date end_date;
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name="car_id", nullable=false)
+	private Car carId;
+    
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+	private RentUser userId;
+    
+    @Column(name = "start_date")
+	private Date startDate;
+
+    @Column(name = "end_date")
+	private Date endDate;
     
     public long getId() {
         return id;
@@ -25,28 +38,28 @@ public class Reservation {
     public void setId(long id) {
         this.id = id;
     }
-    public long getCar_id() {
-        return car_id;
+    public Car getCarId() {
+        return carId;
     }
-    public void setCar_id(long car_id) {
-        this.car_id = car_id;
+    public void setCarId(Car carId) {
+        this.carId = carId;
     }
-    public long getUser_id() {
-        return user_id;
+    public RentUser getUserId() {
+        return userId;
     }
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(RentUser userId) {
+        this.userId = userId;
     }
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEnd_date(Date endDate) {
+        this.endDate = endDate;
     }
 }
