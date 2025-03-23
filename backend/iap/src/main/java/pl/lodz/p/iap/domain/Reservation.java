@@ -19,17 +19,17 @@ public class Reservation {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="car_id", nullable=false)
+    @JoinColumn(name = "car_id", nullable = false)
 	private Car carId;
     
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
 	private RentUser userId;
     
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
 	private Date startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = true)
 	private Date endDate;
     
     public long getId() {

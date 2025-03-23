@@ -47,19 +47,35 @@ public class ReservationController {
                 " User: " + reservation.getUserId() + " Start date: " + reservation.getStartDate() +
                 " End date: " + reservation.getEndDate()) ;
 
-        if (reservation.getId() == 0)
-        {
-            reservationService.addReservation(reservation);
-        }
-        else
-        {
-            reservationService.editReservation(reservation);
-        }
-
-        return "redirect:reservations";
+                String message = "redirect:rentUsers";
+        
+                if (reservation.getId() == 0)
+                {
+                    try
+                    {
+                        reservationService.addReservation(reservation);
+                    }
+                    catch(Exception e)
+                    {
+                        message = e.getMessage();
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        reservationService.editReservation(reservation);
+                    }
+                    catch(Exception e)
+                    {
+                        message = e.getMessage();
+                    }
+                }
+        
+                return message;
     }
 
-    @RequestMapping(value = "/reservation/delete/{reservationId}")
+    @RequestMapping(value = "/reservations/delete/{reservationId}")
     public String deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
         return "redirect:/reservations";

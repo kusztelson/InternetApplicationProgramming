@@ -1,5 +1,6 @@
 package pl.lodz.p.iap.domain;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,11 +13,16 @@ import jakarta.persistence.Table;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private long id;
-	private String name;
-    private String picture;
 
-    @Column(name = "price_per_day")
+    @Column(nullable = false)
+	private String name;
+    
+    @Column(nullable = false)
+    private String picture;
+    
+    @Column(name = "price_per_day", nullable = false)
 	private float pricePerDay;
     
     public long getId() {

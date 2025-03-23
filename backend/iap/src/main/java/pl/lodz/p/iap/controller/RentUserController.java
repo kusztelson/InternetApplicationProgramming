@@ -47,16 +47,32 @@ public class RentUserController {
                 " Last Name: " + rentUser.getSurname() + " Login: " + rentUser.getLogin() +
                 " Password: " + rentUser.getPassword()) ;
 
+        String message = "redirect:rentUsers";
+        
         if (rentUser.getId() == 0)
         {
-            userService.addUser(rentUser);
+            try
+            {
+                userService.addUser(rentUser);
+            }
+            catch(Exception e)
+            {
+                message = e.getMessage();
+            }
         }
         else
         {
-            userService.editUser(rentUser);
+            try
+            {
+                userService.editUser(rentUser);
+            }
+            catch(Exception e)
+            {
+                message = e.getMessage();
+            }
         }
 
-        return "redirect:rentUsers";
+        return message;
     }
 
     @RequestMapping(value = "/rentUsers/delete/{rentUserId}")

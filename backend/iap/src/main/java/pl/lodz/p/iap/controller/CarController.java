@@ -46,19 +46,35 @@ public class CarController {
         System.out.println("Name: " + car.getName() +
                 " Picture: " + car.getPicture() + " Price: " + car.getPricePerDay());
 
-        if (car.getId() == 0)
-        {
-            carService.addCar(car);
-        }
-        else
-        {
-            carService.editCar(car);
-        }
-
-        return "redirect:cars";
+                String message = "redirect:cars";
+        
+                if (car.getId() == 0)
+                {
+                    try
+                    {
+                        carService.addCar(car);
+                    }
+                    catch(Exception e)
+                    {
+                        message = e.getMessage();
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        carService.editCar(car);
+                    }
+                    catch(Exception e)
+                    {
+                        message = e.getMessage();
+                    }
+                }
+        
+                return message;
     }
 
-    @RequestMapping(value = "/car/delete/{carId}")
+    @RequestMapping(value = "/cars/delete/{carId}")
     public String deleteUser(@PathVariable("carId") Long carId) {
         carService.deleteCar(carId);
         return "redirect:/cars";
