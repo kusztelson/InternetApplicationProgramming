@@ -29,7 +29,7 @@ public class Reservation {
     @Column(name = "start_date", nullable = false)
 	private Date startDate;
 
-    @Column(name = "end_date", nullable = true)
+    @Column(name = "end_date")
 	private Date endDate;
     
     public long getId() {
@@ -59,7 +59,7 @@ public class Reservation {
     public Date getEndDate() {
         return endDate;
     }
-    public void setEnd_date(Date endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 }

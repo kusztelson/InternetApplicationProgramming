@@ -1,6 +1,5 @@
 package pl.lodz.p.iap.domain;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
