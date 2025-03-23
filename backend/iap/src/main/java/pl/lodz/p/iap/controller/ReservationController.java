@@ -47,7 +47,7 @@ public class ReservationController {
                 " User: " + reservation.getUserId() + " Start date: " + reservation.getStartDate() +
                 " End date: " + reservation.getEndDate()) ;
 
-                String message = "redirect:rentUsers";
+                String message = "redirect:reservations";
         
                 if (reservation.getId() == 0)
                 {
