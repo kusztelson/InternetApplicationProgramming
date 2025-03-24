@@ -1,0 +1,13 @@
+mat-toolbar {
+    display: flex;
+    gap: 1vw;
+    border-bottom: 1px solid black;
+}
+
+.active {
+    background-color: lightgray
+}
+
+.content {
+    margin: 2vh 2vh 0 2vh;
+}

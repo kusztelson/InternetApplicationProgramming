@@ -1,3 +1,16 @@
-<ng-container *ngIf="hello$ | async as hello">
+<!-- <ng-container *ngIf="hello$ | async as hello">
   <h1> {{ hello }} </h1>
-</ng-container>
+</ng-container> -->
+
+<!-- https://material.angular.io/components/toolbar/overview -->
+<mat-toolbar>
+  <mat-icon> directions_car</mat-icon>
+  <span>Car Renatl</span>
+  <!-- https://material.angular.io/components/tabs/overview -->
+  <button routerLink="/cars" routerLinkActive="active" mat-button>Cars</button>
+  <button routerLink="/reservations" routerLinkActive="active" mat-button>Reservations</button>
+  <button routerLink="/hello" routerLinkActive="hello" mat-button>Hello</button>
+</mat-toolbar>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
