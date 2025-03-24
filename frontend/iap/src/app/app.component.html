@@ -1,3 +1,14 @@
-<ng-container *ngIf="hello$ | async as hello">
-  <h1> {{ hello }} </h1>
-</ng-container>
+<!-- https://material.angular.io/components/toolbar/overview -->
+<mat-toolbar>
+  <!-- https://material.angular.io/components/icon/overview -->
+  <mat-icon> directions_car</mat-icon>
+  <span>Car Renatl</span>
+  <!-- https://material.angular.io/components/button/overview -->
+  <button routerLink="/hello" routerLinkActive="active" mat-button>Hello</button>
+  <button routerLink="/cars" routerLinkActive="active" mat-button>Cars</button>
+  <button routerLink="/reservations" routerLinkActive="active" mat-button>Reservations</button>
+</mat-toolbar>
+<div class="content">
+  <!-- https://angular.dev/guide/routing/common-router-tasks#add-your-routes-to-your-application -->
+  <router-outlet></router-outlet>
+</div>
