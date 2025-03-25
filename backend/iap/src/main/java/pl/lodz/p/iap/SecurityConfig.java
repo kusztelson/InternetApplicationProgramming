@@ -19,11 +19,14 @@ public class SecurityConfig {
                     .requestMatchers("/hello").permitAll()  // Allow everyone to access /hello
                     .requestMatchers("/h2-console/**").permitAll()  // Allow everyone to access /h2-console
                     .requestMatchers("/favicon.ico").permitAll()
-                    .requestMatchers("/rentUsers/**").permitAll()
+                    .requestMatchers("/rentUsers").permitAll()
+                    .requestMatchers("/rentUser/**").permitAll()
                     .requestMatchers("/addRentUser").permitAll()
-                    .requestMatchers("/reservations/**").permitAll()
+                    .requestMatchers("/reservations").permitAll()
+                    .requestMatchers("/reservation/**").permitAll()
                     .requestMatchers("/addReservation").permitAll()
-                    .requestMatchers("/cars/**").permitAll()
+                    .requestMatchers("/cars").permitAll()
+                    .requestMatchers("/car/**").permitAll()
                     .requestMatchers("/addCar").permitAll()
                     .anyRequest().authenticated()       // Secure all other endpoints
             )

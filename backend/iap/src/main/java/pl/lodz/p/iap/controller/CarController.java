@@ -2,9 +2,11 @@ package pl.lodz.p.iap.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,58 +27,46 @@ public class CarController {
         this.carService = carService;
     }
 
+    //Rodzielić na cars i car/{carId}
+    @RequestMapping(value = "/car/{carId}")
+    public Car showCar(HttpServletRequest request, @PathVariable("carId") Long carId) {
+        Car foundCar = null;
+        foundCar = carService.getCar(carId);
+        return foundCar;
+    }
+
     @RequestMapping(value = "/cars")
-    public String showCars(Model model, HttpServletRequest request) {
-        int userId = ServletRequestUtils.getIntParameter(request, "carId", -1);
-
-        if (userId > 0) {
-            model.addAttribute("car", carService.getCar(userId));
-        }
-        else
-        {
-            model.addAttribute("car", new Car());
-        }
-        model.addAttribute("carList", carService.listCar());
-
-        return "car";
+    public List<Car> showCars(HttpServletRequest request) {
+        List<Car> CarList = carService.listCar();
+        return CarList;
     }
 
     @RequestMapping(value = "/addCar", method = RequestMethod.POST)
-    public String addCar(@ModelAttribute("car") Car car) {
+    public Object addCar(@ModelAttribute("car") Car car) {
         System.out.println("Name: " + car.getName() +
                 " Picture: " + car.getPicture() + " Price: " + car.getPricePerDay());
+        
+        try
+        {
+            if (car.getId() == 0)
+            {
+                carService.addCar(car);
+            }
+            else
+            {
+                carService.editCar(car);
+            }
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<Void>(HttpStatusCode.valueOf(404));
+        }
 
-                String message = "redirect:cars";
-        
-                if (car.getId() == 0)
-                {
-                    try
-                    {
-                        carService.addCar(car);
-                    }
-                    catch(Exception e)
-                    {
-                        message = e.getMessage();
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        carService.editCar(car);
-                    }
-                    catch(Exception e)
-                    {
-                        message = e.getMessage();
-                    }
-                }
-        
-                return message;
+        return car;
     }
 
     @RequestMapping(value = "/cars/delete/{carId}")
-    public String deleteUser(@PathVariable("carId") Long carId) {
+    public void deleteUser(@PathVariable("carId") Long carId) {
         carService.deleteCar(carId);
-        return "redirect:/cars";
     }
 }

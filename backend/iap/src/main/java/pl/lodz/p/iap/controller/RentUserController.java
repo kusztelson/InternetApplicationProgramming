@@ -2,9 +2,11 @@ package pl.lodz.p.iap.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,59 +27,47 @@ public class RentUserController {
         this.userService = userService;
     }
 
+    @RequestMapping(value = "/rentUser/{rentUserId}")
+    public RentUser showRentUser(HttpServletRequest request, @PathVariable("rentUserId") Long rentUserId) {
+        RentUser foundRentUser = null;
+        foundRentUser = userService.getUser(rentUserId);
+        return foundRentUser;
+    }
+
     @RequestMapping(value = "/rentUsers")
-    public String showRentUsers(Model model, HttpServletRequest request) {
-        int userId = ServletRequestUtils.getIntParameter(request, "userId", -1);
-
-        if (userId > 0) {
-            model.addAttribute("rentUser", userService.getUser(userId));
-        }
-        else
-        {
-            model.addAttribute("rentUser", new RentUser());
-        }
-        model.addAttribute("rentUserList", userService.listUser());
-
-        return "rentUser";
+    public List<RentUser> showRentUsers(HttpServletRequest request) {
+        List<RentUser> RentUserList = userService.listUser();
+        return RentUserList;
     }
 
     @RequestMapping(value = "/addRentUser", method = RequestMethod.POST)
-    public String addRentUser(@ModelAttribute("rentUser") RentUser rentUser) {
+    public Object addRentUser(@ModelAttribute("rentUser") RentUser rentUser) {
         System.out.println("First Name: " + rentUser.getName() +
                 " Last Name: " + rentUser.getSurname() + " Login: " + rentUser.getLogin() +
                 " Password: " + rentUser.getPassword()) ;
 
-        String message = "redirect:rentUsers";
-        
-        if (rentUser.getId() == 0)
+        try
         {
-            try
+            if (rentUser.getId() == 0)
             {
                 userService.addUser(rentUser);
             }
-            catch(Exception e)
-            {
-                message = e.getMessage();
-            }
-        }
-        else
-        {
-            try
+            else
             {
                 userService.editUser(rentUser);
             }
-            catch(Exception e)
-            {
-                message = e.getMessage();
-            }
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<Void>(HttpStatusCode.valueOf(404));
         }
 
-        return message;
+        return rentUser;
     }
 
     @RequestMapping(value = "/rentUsers/delete/{rentUserId}")
-    public String deleteRentUser(@PathVariable("rentUserId") Long rentUserId) {
+    public void deleteRentUser(@PathVariable("rentUserId") Long rentUserId) {
         userService.deleteUser(rentUserId);
-        return "redirect:/rentUsers";
+        //return "redirect:/rentUsers";
     }
 }

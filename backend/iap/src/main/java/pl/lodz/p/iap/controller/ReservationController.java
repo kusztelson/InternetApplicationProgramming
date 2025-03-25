@@ -2,9 +2,11 @@ package pl.lodz.p.iap.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,59 +27,47 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
+    @RequestMapping(value = "/reservation/{reservationId}")
+    public Reservation showReservation(HttpServletRequest request, @PathVariable("reservationId") Long reservationId) {
+        Reservation foundReservation = null;
+        foundReservation = reservationService.getReservation(reservationId);
+        return foundReservation;
+    }
+
     @RequestMapping(value = "/reservations")
-    public String showReservations(Model model, HttpServletRequest request) {
-        int reservationId = ServletRequestUtils.getIntParameter(request, "reservationId", -1);
-
-        if (reservationId > 0) {
-            model.addAttribute("reservation", reservationService.getReservation(reservationId));
-        }
-        else
-        {
-            model.addAttribute("reservation", new Reservation());
-        }
-        model.addAttribute("reservationList", reservationService.listReservation());
-
-        return "reservation";
+    public List<Reservation> showReservations(HttpServletRequest request) {
+        List<Reservation> ReservationList = reservationService.listReservation();
+        return ReservationList;
     }
 
     @RequestMapping(value = "/addReservation", method = RequestMethod.POST)
-    public String addReservation(@ModelAttribute("reservation") Reservation reservation) {
+    public Object addReservation(@ModelAttribute("reservation") Reservation reservation) {
         System.out.println("Car: " + reservation.getCarId() +
                 " User: " + reservation.getUserId() + " Start date: " + reservation.getStartDate() +
                 " End date: " + reservation.getEndDate()) ;
 
-                String message = "redirect:reservations";
-        
-                if (reservation.getId() == 0)
-                {
-                    try
-                    {
-                        reservationService.addReservation(reservation);
-                    }
-                    catch(Exception e)
-                    {
-                        message = e.getMessage();
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        reservationService.editReservation(reservation);
-                    }
-                    catch(Exception e)
-                    {
-                        message = e.getMessage();
-                    }
-                }
-        
-                return message;
+        try
+        {
+            if (reservation.getId() == 0)
+            {
+                reservationService.addReservation(reservation);
+            }
+            else
+            {
+                reservationService.editReservation(reservation);
+            }
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<Void>(HttpStatusCode.valueOf(404));
+        }
+
+        return reservation;
     }
 
     @RequestMapping(value = "/reservations/delete/{reservationId}")
-    public String deleteReservation(@PathVariable("reservationId") Long reservationId) {
+    public void deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
-        return "redirect:/reservations";
+        //return "redirect:/reservations";
     }
 }
