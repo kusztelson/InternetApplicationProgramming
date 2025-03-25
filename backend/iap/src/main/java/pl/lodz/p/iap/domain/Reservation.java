@@ -10,9 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Reservation")
+@Getter @Setter @NoArgsConstructor
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,34 +36,11 @@ public class Reservation {
     @Column(name = "end_date")
 	private Date endDate;
     
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
+    public Reservation(long id, Car carId, RentUser userId, Date startDate, Date endDate) {
         this.id = id;
-    }
-    public Car getCarId() {
-        return carId;
-    }
-    public void setCarId(Car carId) {
         this.carId = carId;
-    }
-    public RentUser getUserId() {
-        return userId;
-    }
-    public void setUserId(RentUser userId) {
         this.userId = userId;
-    }
-    public Date getStartDate() {
-        return startDate;
-    }
-    public void setStartDate(Date startDate) {
         this.startDate = startDate;
-    }
-    public Date getEndDate() {
-        return endDate;
-    }
-    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 }

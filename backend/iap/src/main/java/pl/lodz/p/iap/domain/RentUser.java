@@ -6,9 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "RentUser")
+@Getter @Setter @NoArgsConstructor
 public class RentUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,35 +30,12 @@ public class RentUser {
 
     @Column(nullable = false)
 	private String surname;
-    
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
+
+    public RentUser(long id, String login, String password, String name, String surname) {
         this.id = id;
-    }
-    public String getLogin() {
-        return login;
-    }
-    public void setLogin(String login) {
         this.login = login;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
         this.password = password;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
         this.name = name;
-    }
-    public String getSurname() {
-        return surname;
-    }
-    public void setSurname(String surname) {
         this.surname = surname;
     }
 }

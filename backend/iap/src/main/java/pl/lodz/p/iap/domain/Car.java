@@ -6,9 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Car")
+@Getter @Setter @NoArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,29 +27,11 @@ public class Car {
     
     @Column(name = "price_per_day", nullable = false)
 	private float pricePerDay;
-    
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
+
+    public Car(long id, String name, String picture, float pricePerDay) {
         this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
         this.name = name;
-    }
-    public String getPicture() {
-        return picture;
-    }
-    public void setPicture(String picture) {
         this.picture = picture;
-    }
-    public float getPricePerDay() {
-        return pricePerDay;
-    }
-    public void setPricePerDay(float pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
 }
