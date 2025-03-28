@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -16,9 +17,22 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
                     .requestMatchers("/hello").permitAll()  // Allow everyone to access /hello
+                    .requestMatchers("/h2-console/**").permitAll()  // Allow everyone to access /h2-console
+                    .requestMatchers("/favicon.ico").permitAll()
+                    .requestMatchers("/rentUsers").permitAll()
+                    .requestMatchers("/rentUser/**").permitAll()
+                    .requestMatchers("/addRentUser").permitAll()
+                    .requestMatchers("/reservations").permitAll()
+                    .requestMatchers("/reservation/**").permitAll()
+                    .requestMatchers("/addReservation").permitAll()
+                    .requestMatchers("/cars").permitAll()
+                    .requestMatchers("/car/**").permitAll()
+                    .requestMatchers("/addCar").permitAll()
                     .anyRequest().authenticated()       // Secure all other endpoints
-            );
-
+            )
+            .csrf(AbstractHttpConfigurer::disable)
+            .headers(headers -> headers
+			.frameOptions(frameOptions -> frameOptions.disable()));
         return http.build();
     }
 }
