@@ -1,5 +1,8 @@
 package pl.lodz.p.iap.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,5 +40,11 @@ public class RentUser {
         this.password = password;
         this.name = name;
         this.surname = surname;
+    }
+
+    @JsonIgnore
+    @JsonProperty(value = "password")
+    public String getPassword() {
+        return password;
     }
 }
