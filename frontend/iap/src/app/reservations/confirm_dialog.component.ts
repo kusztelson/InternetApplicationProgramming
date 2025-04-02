@@ -5,8 +5,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-dialog',
-  standalone: true, // ✅ Must be standalone
-  imports: [MatDialogModule, MatButtonModule], // ✅ Import required Material modules
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule], 
   template: `
     <h2 mat-dialog-title>Cancel Reservation</h2>
     <mat-dialog-content>
