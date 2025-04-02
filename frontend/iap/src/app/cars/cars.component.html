@@ -1,184 +1,45 @@
 <div class="car-list">
+  @if (isLoading) {
+    <div class="loading-message">
+      Loading available cars...
+    </div>
+  }
+
+  @for (car of cars; track car.id) {
     <mat-card class="car-card" appearance="outlined">
-      <mat-card-header>
-        <div mat-card-avatar class="car-avatar">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/50px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Car Avatar">
-        </div>
-        <mat-card-title>Mini</mat-card-title>
-        <mat-card-subtitle>Chevrolet Spark or similar</mat-card-subtitle>
-      </mat-card-header>
-      
-      <div class="car-image-container">
-        <img class="car-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/250px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Chevrolet Spark">
+    <mat-card-header>
+      <div mat-card-avatar class="car-avatar">
+        <img [src]="car.picture" [alt]="car.name + ' avatar'">
       </div>
-      
-      <mat-card-content>
-        <div class="car-details">
-          <p><strong>Passengers:</strong> 4</p>
-          <p><strong>Doors:</strong> 5</p>
-          <p><strong>Luggage:</strong> 1</p>
-          <p><strong>Transmission:</strong> Manual</p>
-          <p><strong>Air Conditioning:</strong> Yes</p>
-          <p><strong>Minimum Age:</strong> 21</p>
-        </div>
-        <ul class="features">
-          <li>✅ <strong>50€/day</strong> </li>
-          <li>✅ <strong>Unlimited mileage</strong></li>
-          <li>✅ <strong>Full protection included</strong></li>
-        </ul>
-      </mat-card-content>
-      
-      <mat-card-actions>
-        <button mat-button color="primary">RENT</button>
-        <button mat-button>DETAILS</button>
-      </mat-card-actions>
-    </mat-card>
+      <mat-card-title>{{car.category}}</mat-card-title>
+      <mat-card-subtitle>{{car.name}} or similar</mat-card-subtitle>
+    </mat-card-header>
+    
+    <div class="car-image-container">
+      <img class="car-image" [src]="car.picture" [alt]="car.name">
+    </div>
+    
+    <mat-card-content>
+      <ul class="features">
+        <li>✅ <strong>{{car.pricePerDay}}€/day</strong></li>
+        <li>✅ <strong>Unlimited mileage</strong></li>
+        <li>✅ <strong>Full protection included</strong></li>
+        @if (car.category=='Premium') {
+        <li>✅ <strong>Minimum Age 25</strong></li>  
+        }
+        @else {<li>✅ <strong>Minimum Age 21</strong></li>}  
+      </ul>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <button mat-button color="primary">RENT</button>
+      <button mat-button>DETAILS</button>
+    </mat-card-actions>
+  </mat-card>
+}
+</div>
 
-    <mat-card class="car-card" appearance="outlined">
-        <mat-card-header>
-          <div mat-card-avatar class="car-avatar">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/50px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Car Avatar">
-          </div>
-          <mat-card-title>Mini</mat-card-title>
-          <mat-card-subtitle>Chevrolet Spark or similar</mat-card-subtitle>
-        </mat-card-header>
-        
-        <div class="car-image-container">
-          <img class="car-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/250px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Chevrolet Spark">
-        </div>
-        
-        <mat-card-content>
-          <div class="car-details">
-            <p><strong>Passengers:</strong> 4</p>
-            <p><strong>Doors:</strong> 5</p>
-            <p><strong>Luggage:</strong> 1</p>
-            <p><strong>Transmission:</strong> Manual</p>
-            <p><strong>Air Conditioning:</strong> Yes</p>
-            <p><strong>Minimum Age:</strong> 21</p>
-          </div>
-          <ul class="features">
-            <li>✅ <strong>50€/day</strong> </li>
-            <li>✅ <strong>Unlimited mileage</strong></li>
-            <li>✅ <strong>Full protection included</strong></li>
-          </ul>
-        </mat-card-content>
-        
-        <mat-card-actions>
-          <button mat-button color="primary">RENT</button>
-          <button mat-button>DETAILS</button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="car-card" appearance="outlined">
-        <mat-card-header>
-          <div mat-card-avatar class="car-avatar">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/50px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Car Avatar">
-          </div>
-          <mat-card-title>Mini</mat-card-title>
-          <mat-card-subtitle>Chevrolet Spark or similar</mat-card-subtitle>
-        </mat-card-header>
-        
-        <div class="car-image-container">
-          <img class="car-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/250px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Chevrolet Spark">
-        </div>
-        
-        <mat-card-content>
-          <div class="car-details">
-            <p><strong>Passengers:</strong> 4</p>
-            <p><strong>Doors:</strong> 5</p>
-            <p><strong>Luggage:</strong> 1</p>
-            <p><strong>Transmission:</strong> Manual</p>
-            <p><strong>Air Conditioning:</strong> Yes</p>
-            <p><strong>Minimum Age:</strong> 21</p>
-          </div>
-          <ul class="features">
-            <li>✅ <strong>50€/day</strong> </li>
-            <li>✅ <strong>Unlimited mileage</strong></li>
-            <li>✅ <strong>Full protection included</strong></li>
-          </ul>
-        </mat-card-content>
-        
-        <mat-card-actions>
-          <button mat-button color="primary">RENT</button>
-          <button mat-button>DETAILS</button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="car-card" appearance="outlined">
-        <mat-card-header>
-          <div mat-card-avatar class="car-avatar">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/50px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Car Avatar">
-          </div>
-          <mat-card-title>Mini</mat-card-title>
-          <mat-card-subtitle>Chevrolet Spark or similar</mat-card-subtitle>
-        </mat-card-header>
-        
-        <div class="car-image-container">
-          <img class="car-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/250px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Chevrolet Spark">
-        </div>
-        
-        <mat-card-content>
-          <div class="car-details">
-            <p><strong>Passengers:</strong> 4</p>
-            <p><strong>Doors:</strong> 5</p>
-            <p><strong>Luggage:</strong> 1</p>
-            <p><strong>Transmission:</strong> Manual</p>
-            <p><strong>Air Conditioning:</strong> Yes</p>
-            <p><strong>Minimum Age:</strong> 21</p>
-          </div>
-          <ul class="features">
-            <li>✅ <strong>50€/day</strong> </li>
-            <li>✅ <strong>Unlimited mileage</strong></li>
-            <li>✅ <strong>Full protection included</strong></li>
-          </ul>
-        </mat-card-content>
-        
-        <mat-card-actions>
-          <button mat-button color="primary">RENT</button>
-          <button mat-button>DETAILS</button>
-        </mat-card-actions>
-      </mat-card>
-
-      <mat-card class="car-card" appearance="outlined">
-        <mat-card-header>
-          <div mat-card-avatar class="car-avatar">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/50px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Car Avatar">
-          </div>
-          <mat-card-title>Mini</mat-card-title>
-          <mat-card-subtitle>Chevrolet Spark or similar</mat-card-subtitle>
-        </mat-card-header>
-        
-        <div class="car-image-container">
-          <img class="car-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/250px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg" alt="Chevrolet Spark">
-        </div>
-        
-        <mat-card-content>
-          <div class="car-details">
-            <p><strong>Passengers:</strong> 4</p>
-            <p><strong>Doors:</strong> 5</p>
-            <p><strong>Luggage:</strong> 1</p>
-            <p><strong>Transmission:</strong> Manual</p>
-            <p><strong>Air Conditioning:</strong> Yes</p>
-            <p><strong>Minimum Age:</strong> 21</p>
-          </div>
-          <ul class="features">
-            <li>✅ <strong>50€/day</strong> </li>
-            <li>✅ <strong>Unlimited mileage</strong></li>
-            <li>✅ <strong>Full protection included</strong></li>
-          </ul>
-        </mat-card-content>
-        
-        <mat-card-actions>
-          <button mat-button color="primary">RENT</button>
-          <button mat-button>DETAILS</button>
-        </mat-card-actions>
-      </mat-card>
-
-
-  </div>
-  
-  
-
-
-  <style>
+<style>
   .car-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
