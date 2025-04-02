@@ -12,12 +12,14 @@
           <div class="custom-text-content">
             <mat-card-title>Chevrolet Spark</mat-card-title>
             <mat-card-subtitle>Natalia Biernacka</mat-card-subtitle>
-            <mat-card-content>
-              longText
+            <mat-card-content style="text-align: center;">
+              <br/>
+              jakas data od
+              jakas data do
             </mat-card-content>
             <mat-card-actions class="custom-actions">
                 <div class="example-button-container">
-                    <button mat-fab extended class="custom-button">
+                    <button mat-fab extended class="custom-button" (click)="openDialog()">
                       Cancel
                       <mat-icon>delete</mat-icon>
                     </button>
@@ -46,13 +48,13 @@
               long text
             </mat-card-content>
             <mat-card-actions class="custom-actions">
-                <div class="example-button-container">
-                    <button mat-fab extended class="custom-button">
-                      Cancel
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-            </mat-card-actions>
+              <div class="example-button-container">
+                  <button mat-fab extended class="custom-button" (click)="openDialog()">
+                    Cancel
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+          </mat-card-actions>
           </div>
         </div>
       </mat-card>
@@ -74,13 +76,13 @@
               longText
             </mat-card-content>
             <mat-card-actions class="custom-actions">
-                <div class="example-button-container">
-                    <button mat-fab extended class="custom-button">
-                      Cancel
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-            </mat-card-actions>
+              <div class="example-button-container">
+                  <button mat-fab extended class="custom-button" (click)="openDialog()">
+                    Cancel
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+          </mat-card-actions>
           </div>
         </div>
       </mat-card>
