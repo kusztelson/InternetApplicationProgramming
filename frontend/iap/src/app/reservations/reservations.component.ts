@@ -10,15 +10,7 @@ import { ConfirmDialogComponent } from './confirm_dialog.component';
 
 @Component({
   selector: 'app-reservations',
-  standalone: true,
-  imports: [
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatTableModule
-  ],
+  imports: [],
   templateUrl: './reservations.component.html',
   styleUrl: './reservations.component.scss'
 })
