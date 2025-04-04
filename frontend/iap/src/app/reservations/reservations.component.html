@@ -1,6 +1,8 @@
 
 <p>reservations works! lala</p>
-
+<br/>
+ 
+<ng-container *ngIf="reservations$ | async as reservations">{{ reservations[0].id }}</ng-container>
 
 
       <mat-card class="example-card" appearance="outlined">
