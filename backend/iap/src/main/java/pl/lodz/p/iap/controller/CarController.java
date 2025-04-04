@@ -5,8 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.lodz.p.iap.domain.Car;
+import pl.lodz.p.iap.exceptions.CarNotFoundException;
+import pl.lodz.p.iap.exceptions.UserNotFoundException;
 import pl.lodz.p.iap.service.CarService;
 
 @RestController
@@ -32,6 +32,12 @@ public class CarController {
     public Car showCar(HttpServletRequest request, @PathVariable("carId") Long carId) {
         Car foundCar = null;
         foundCar = carService.getCar(carId);
+        
+        if(foundCar == null)
+        {
+            throw new CarNotFoundException(carId, "/car/%d".formatted(carId));
+        }
+
         return foundCar;
     }
 
@@ -59,7 +65,8 @@ public class CarController {
         }
         catch(Exception e)
         {
-            return new ResponseEntity<Void>(HttpStatusCode.valueOf(404));
+            Long carId = car.getId();
+            throw new UserNotFoundException(carId, "/addCar");
         }
 
         return car;
