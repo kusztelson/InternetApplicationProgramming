@@ -27,11 +27,14 @@ public class Car {
     
     @Column(name = "price_per_day", nullable = false)
 	private float pricePerDay;
+    @Column(name = "Category",nullable = false)
+    private String category;
 
-    public Car(long id, String name, String picture, float pricePerDay) {
+    public Car(long id, String name, String picture, float pricePerDay,String category) {
         this.id = id;
         this.name = name;
         this.picture = picture;
         this.pricePerDay = pricePerDay;
+        this.category = category;
     }
 }
