@@ -1,0 +1,38 @@
+<ng-container *ngFor="let reservation of reservations$ | async; index as i">
+  <mat-card class="example-card" appearance="outlined">
+    <div class="custom-container">
+      <img mat-card-lg-image 
+           src="{{ reservation.carId.picture }}" 
+           class="custom-img">
+      
+      <div class="custom-text-content">
+        <mat-card-title>{{ reservation.carId.category }}</mat-card-title>
+        <mat-card-subtitle>{{ reservation.carId.name }}</mat-card-subtitle>
+        <mat-card-content style="text-align: center;">
+          <br/>
+          <table class="center">
+            <tr>
+              <th>Name</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>{{ reservation.startDate }}</td>
+              <td>{{reservation.endDate}}</td>
+            </tr>
+          </table>
+        </mat-card-content>
+        <mat-card-actions class="custom-actions">
+            <div class="example-button-container">
+                <button mat-fab extended class="custom-button">
+                  Cancel
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+        </mat-card-actions>
+      </div>
+    </div>
+  </mat-card>
+  <br/>
+</ng-container>

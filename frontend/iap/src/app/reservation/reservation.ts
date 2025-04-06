@@ -6,7 +6,9 @@ export default interface Reservation {
         name: string;
         picture: string;
         pricePerDay: number;
+        category: string;
     };
+
 
 	// RentUser userId;
 
