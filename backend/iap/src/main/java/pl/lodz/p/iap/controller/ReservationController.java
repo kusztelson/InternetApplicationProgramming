@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,6 @@ import pl.lodz.p.iap.exceptions.UserNotFoundException;
 import pl.lodz.p.iap.service.ReservationService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class ReservationController {
     private ReservationService reservationService;
 
