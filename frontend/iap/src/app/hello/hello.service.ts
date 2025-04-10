@@ -11,6 +11,10 @@ export class HelloService {
   constructor(private http: HttpClient) { }
 
   public getHello(): Observable<any> {
-    return this.http.get(environment.apiUrl + "hello", {responseType: "text" })
+    return this.http.get(environment.apiUrl + "hello", {
+      responseType: "text",
+      headers: {
+        "Authorization": "Basic dXNlcjpwYXNzd29yZA=="
+      } })
   }
 }
