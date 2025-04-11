@@ -1,9 +1,8 @@
-.example-card {
-    max-width: 400px;
-  }
-  
-  .example-header-image {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg/250px-Chevrolet_Spark_LS%2B_1.2_–_Frontansicht%2C_26._Juni_2011%2C_Mettmann.jpg');
-    background-size: cover;
-  }
-  
+.car-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
