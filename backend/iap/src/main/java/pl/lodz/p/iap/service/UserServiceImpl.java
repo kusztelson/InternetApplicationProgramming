@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
     public List<RentUser> listUser() {
         return userRepository.findAll();
     }
+
+    @Override
+    public RentUser getUserByLogin(String login) {
+        return this.userRepository.findOneByLogin(login);
+    }
 }

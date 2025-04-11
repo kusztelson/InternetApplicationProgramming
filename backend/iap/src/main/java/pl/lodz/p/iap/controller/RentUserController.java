@@ -73,4 +73,16 @@ public class RentUserController {
     public void deleteRentUser(@PathVariable("rentUserId") Long rentUserId) {
         userService.deleteUser(rentUserId);
     }
+
+    @RequestMapping(value = "/rentUser/login/{login}")
+    public RentUser getUserByLogin(@PathVariable("login") String login) {
+        RentUser rentUser = this.userService.getUserByLogin(login);
+
+        if(rentUser == null)
+        {
+            throw new UserNotFoundException(login, "/rentUser/%d".formatted(rentUser));
+        }
+
+        return rentUser;
+    }
 }
