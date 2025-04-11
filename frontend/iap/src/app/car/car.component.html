@@ -1,0 +1,26 @@
+<p>car works!</p>
+<br/>
+ 
+<ng-container *ngIf="car$ | async as car">
+    <mat-card class="car-edit-card" appearance="outlined">
+        <mat-card-header>
+            <mat-card-title>{{ car.name }}</mat-card-title>
+          </mat-card-header>
+        <mat-card-content>
+            <p>Category: {{ car.category }}</p>
+        </mat-card-content>
+
+        <img class="car-image" mat-card-image [src]="car.picture" [alt]="car.name">
+
+        <form class="car-edit-form">
+            <mat-form-field class="car-price-input">
+                <mat-label>Enter a new price</mat-label>
+                <input matInput type="text" (input)="updatePriceOfCar(car)" [placeholder]="'Current price per day: '+car.pricePerDay">
+            </mat-form-field>
+        </form>
+
+        <mat-card-footer class="submit-changes-footer">
+            <button class="submit-button" (click)="saveChanges(car)" climat-raised-button>Submit changes</button>
+        </mat-card-footer>
+    </mat-card>
+</ng-container>

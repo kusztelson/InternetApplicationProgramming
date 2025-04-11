@@ -19,4 +19,8 @@ export class CarsService {
   getCarById(id: number): Observable<Car> {
     return this.http.get<Car>(`${this.apiUrl}/car/${id}`);
   }
+
+  saveCarChanges(car: Car): Observable<Car> {
+    return this.http.post<Car>(`${this.apiUrl}/cars/edit/${car.id}`, null);
+  }
 }

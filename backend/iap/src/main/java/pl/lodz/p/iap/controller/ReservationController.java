@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pl.lodz.p.iap.domain.Reservation;
 import pl.lodz.p.iap.exceptions.ReservationNotFoundException;
-import pl.lodz.p.iap.exceptions.UserNotFoundException;
 import pl.lodz.p.iap.service.ReservationService;
 
 @RestController
@@ -66,7 +65,7 @@ public class ReservationController {
         catch(Exception e)
         {
             Long reservationId = reservation.getId();
-            throw new UserNotFoundException(reservationId, "/addReservation");
+            throw new ReservationNotFoundException(reservationId, "/addReservation");
         }
 
         return reservation;
@@ -75,6 +74,5 @@ public class ReservationController {
     @RequestMapping(value = "/reservations/delete/{reservationId}")
     public void deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
-        //return "redirect:/reservations";
     }
 }
