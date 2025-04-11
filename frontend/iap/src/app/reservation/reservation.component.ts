@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
-import Reservation from './reservation';
-import { ReservationsService } from './reservation.service';
+// import Reservation from './reservation';
+// import { ReservationsService } from './reservation.service';
+import { ReservationsService } from '../reservations/reservations.service';
 import { CommonModule } from '@angular/common';
+import { Car } from '../cars/car.model';
 
 
 @Component({
@@ -18,11 +20,9 @@ import { CommonModule } from '@angular/common';
 })
 
 export class ReservationComponent {
-  reservations$?: Observable<Reservation[]>
+  @Input() car!: Car
+  @Input() reservationId!: number;
+  @Input() reservationStartDate!: string;
+  @Input() reservationEndDate!: string;
   
-  constructor(private service: ReservationsService) {}
-  
-  ngOnInit(): void {
-    this.reservations$ = this.service.getReservations()
-  }
 }

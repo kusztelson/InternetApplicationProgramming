@@ -1,19 +1,14 @@
+import { Car } from "../cars/car.model";
+
 export default interface Reservation {
     id: number;
 
-	carId: {
-        id: number;
-        name: string;
-        picture: string;
-        pricePerDay: number;
-        category: string;
-    };
+    carId: Car;
 
+    // RentUser userId;
 
-	// RentUser userId;
+    startDate: string;
 
-	startDate: string;
-
-	endDate: string;
+    endDate: string;
 }
 
