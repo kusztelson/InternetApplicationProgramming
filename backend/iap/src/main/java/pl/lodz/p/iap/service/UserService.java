@@ -10,4 +10,5 @@ public interface UserService {
     public List<RentUser> listUser();
     public void deleteUser(long id);
     public RentUser getUser(long id);
+    public RentUser getUserByLogin(String login);
 }
