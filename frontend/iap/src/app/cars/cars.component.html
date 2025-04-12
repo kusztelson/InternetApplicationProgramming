@@ -6,7 +6,8 @@
   }
 
   @for (car of cars; track car.id) {
-    <app-card-car [car]="car"></app-card-car>
+    <app-card-car [car]="car" [showRentButton]="true"></app-card-car>
+     
 }
 </div>
 

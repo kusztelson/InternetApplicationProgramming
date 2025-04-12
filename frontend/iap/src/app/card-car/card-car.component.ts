@@ -1,6 +1,6 @@
 import { Component, Input,OnInit } from '@angular/core';
 import { Car } from '../cars/car.model';
-import { CarsService } from '../cars/cars.service';
+import { Router } from '@angular/router';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -11,5 +11,11 @@ import {MatCardModule} from '@angular/material/card';
   styleUrl: './card-car.component.scss'
 })
 export class CardCarComponent {
-  @Input() car!: Car
+  @Input() car!: Car;
+  @Input() showRentButton: boolean = true;
+  constructor(private router: Router) {}
+
+  onRentClick(carId: number) {
+    this.router.navigate(['/cars/rent', carId]);
+  }
 }
