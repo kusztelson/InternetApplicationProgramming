@@ -39,7 +39,4 @@ export class RentComponent {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
     this.car = this.service.getCarById(this.carId)
   }
-
-
-
 }
