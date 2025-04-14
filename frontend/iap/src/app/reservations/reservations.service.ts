@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import Reservation from './reservation';
+import Reservation from '../reservation/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +13,9 @@ export class ReservationsService {
   
     public getReservations(): Observable<Reservation[]> {
       return this.http.get<Reservation[]>(environment.apiUrl + "reservations")
+    }
+
+    public deleteReservation(id: number) {
+      return this.http.delete<Reservation>(environment.apiUrl + `reservations/delete/${id}`)
     }
 }
