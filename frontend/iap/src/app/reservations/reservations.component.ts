@@ -33,4 +33,9 @@ export class ReservationsComponent {
     //   }
     // });
   }
+
+  deleteReservationInView(reservations: Reservation[], reservation: Reservation): void {
+    let index = reservations.indexOf(reservation);
+    reservations.splice(index, 1);
+  }
 }
