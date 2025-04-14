@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ import pl.lodz.p.iap.exceptions.UserNotFoundException;
 import pl.lodz.p.iap.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class RentUserController {
     private UserService userService;
 
@@ -74,5 +72,17 @@ public class RentUserController {
     @RequestMapping(value = "/rentUsers/delete/{rentUserId}")
     public void deleteRentUser(@PathVariable("rentUserId") Long rentUserId) {
         userService.deleteUser(rentUserId);
+    }
+
+    @RequestMapping(value = "/rentUser/login/{login}")
+    public RentUser getUserByLogin(@PathVariable("login") String login) {
+        RentUser rentUser = this.userService.getUserByLogin(login);
+
+        if(rentUser == null)
+        {
+            throw new UserNotFoundException(login, "/rentUser/%d".formatted(rentUser));
+        }
+
+        return rentUser;
     }
 }

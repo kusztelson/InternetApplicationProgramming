@@ -1,9 +1,10 @@
-INSERT INTO Rent_User (login, password, name, surname) 
-VALUES ('Vitek', 'password', 'Witold', 'Kubisiak');
-INSERT INTO Rent_User (login, password, name, surname) 
-VALUES ('Adam123', 'password', 'Adam', 'Kowalski');
-INSERT INTO Rent_User (login, password, name, surname) 
-VALUES ('R0bert', 'password', 'Robert', 'Przybysz');
+-- password is 'password' (it is Bcrypt encoded string)
+INSERT INTO Rent_User (login, password, name, surname, rent_user_role) 
+VALUES ('user', '$2a$12$AX5RoIUobp0gohFeJZNUQ./9M8ghyVVumovA0oT9vP30DYA6ChyDu', 'Witold', 'Kubisiak', 'ROLE_USER');
+INSERT INTO Rent_User (login, password, name, surname, rent_user_role) 
+VALUES ('admin', '$2a$12$AX5RoIUobp0gohFeJZNUQ./9M8ghyVVumovA0oT9vP30DYA6ChyDu', 'Adam', 'Kowalski', 'ROLE_ADMIN');
+INSERT INTO Rent_User (login, password, name, surname, rent_user_role) 
+VALUES ('user1', '$2a$12$AX5RoIUobp0gohFeJZNUQ./9M8ghyVVumovA0oT9vP30DYA6ChyDu', 'Robert', 'Przybysz', 'ROLE_USER');
 
 INSERT INTO Car (name, picture, price_per_day,category) 
 VALUES ('Volkswagen Golf', 'https://ocs-pl.oktawave.com/v1/AUTH_2887234e-384a-4873-8bc5-405211db13a2/autoblog/2019/10/volkswagen-golf-8-2020-05.jpg', 100.0,'Compact');
