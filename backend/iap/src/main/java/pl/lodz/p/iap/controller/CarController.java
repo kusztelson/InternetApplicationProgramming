@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,16 +81,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/cars/edit/{carId}", method = RequestMethod.POST)
-    public Car saveCarEditChanges(@ModelAttribute("car") Car car) {
-        String msg = "";
-        msg += car.getId();
-        msg += "\n";
-        msg += car.getName();
-        msg += "\n";
-        msg += car.getPicture();
-        msg += "\n";
-        msg += car.getPricePerDay();
-        System.out.println("test:\n" + msg);
+    public Car saveCarEditChanges(@RequestBody Car car) {
         try
         {
             carService.editCar(car);

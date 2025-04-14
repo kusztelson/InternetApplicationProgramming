@@ -1,5 +1,13 @@
+.card-edit-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
 .car-edit-card {
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
   }
 
 .car-image {

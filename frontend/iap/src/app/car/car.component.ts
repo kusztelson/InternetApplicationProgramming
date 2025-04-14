@@ -44,6 +44,7 @@ export class CarComponent {
       this.service.saveCarChanges(car, this.newPrice).subscribe(
         (response) => {
           console.log(response)
+          this.priceInput = ""
         }
       )
     }
