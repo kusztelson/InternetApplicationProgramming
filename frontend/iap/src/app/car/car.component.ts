@@ -22,7 +22,8 @@ import {MatCardModule} from '@angular/material/card';
 })
 export class CarComponent {
   @Input() carId!: number
-  priceInput = ''
+  priceInput: string = ""
+  newPrice: number = 0.0
   car$?: Observable<Car>
 
     constructor(private service: CarsService) {}
@@ -31,18 +32,19 @@ export class CarComponent {
       this.car$ = this.service.getCarById(this.carId)
     }
 
-    updatePriceOfCar(car: Car) {
-      var priceAsFloat: number;
+    parseInputToNumber() {
       try
       {
-        priceAsFloat = Number(this.priceInput)
-        car.pricePerDay = priceAsFloat
-        console.log(priceAsFloat)
+        this.newPrice = parseFloat(this.priceInput)
       }
       catch {}
     }
 
     saveChanges(car: Car): void {
-      this.service.saveCarChanges(car)
+      this.service.saveCarChanges(car, this.newPrice).subscribe(
+        (response) => {
+          console.log(response)
+        }
+      )
     }
 }

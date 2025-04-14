@@ -83,6 +83,15 @@ public class CarController {
 
     @RequestMapping(value = "/cars/edit/{carId}", method = RequestMethod.POST)
     public Car saveCarEditChanges(@ModelAttribute("car") Car car) {
+        String msg = "";
+        msg += car.getId();
+        msg += "\n";
+        msg += car.getName();
+        msg += "\n";
+        msg += car.getPicture();
+        msg += "\n";
+        msg += car.getPricePerDay();
+        System.out.println("test:\n" + msg);
         try
         {
             carService.editCar(car);
