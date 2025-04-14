@@ -14,4 +14,8 @@ export class ReservationsService {
     public getReservations(): Observable<Reservation[]> {
       return this.http.get<Reservation[]>(environment.apiUrl + "reservations")
     }
+
+    public deleteReservation(id: number) {
+      return this.http.delete<Reservation>(environment.apiUrl + `reservations/delete/${id}`)
+    }
 }

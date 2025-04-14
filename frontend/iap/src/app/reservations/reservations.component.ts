@@ -21,4 +21,16 @@ export class ReservationsComponent {
   ngOnInit(): void {
     this.reservations$ = this.service.getReservations()
   }
+
+  deleteReservation(id: number): void {
+    this.service.deleteReservation(id).subscribe();
+    // this.service.deleteReservation(id).subscribe({
+    //   next: (response) => {
+    //     console.log('Deleted successfully', response);
+    //   },
+    //   error: (err) => {
+    //     console.error('Delete failed', err);
+    //   }
+    // });
+  }
 }
