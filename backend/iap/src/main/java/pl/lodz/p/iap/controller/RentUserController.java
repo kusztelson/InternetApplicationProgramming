@@ -5,9 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.lodz.p.iap.domain.RentUser;
+import pl.lodz.p.iap.exceptions.UserNotFoundException;
 import pl.lodz.p.iap.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class RentUserController {
     private UserService userService;
 
@@ -31,6 +28,12 @@ public class RentUserController {
     public RentUser showRentUser(HttpServletRequest request, @PathVariable("rentUserId") Long rentUserId) {
         RentUser foundRentUser = null;
         foundRentUser = userService.getUser(rentUserId);
+
+        if(foundRentUser == null)
+        {
+            throw new UserNotFoundException(rentUserId, "/rentUser/%d".formatted(rentUserId));
+        }
+
         return foundRentUser;
     }
 
@@ -59,7 +62,8 @@ public class RentUserController {
         }
         catch(Exception e)
         {
-            return new ResponseEntity<Void>(HttpStatusCode.valueOf(404));
+            Long rentUserId = rentUser.getId();
+            throw new UserNotFoundException(rentUserId, "/addRentUser");
         }
 
         return rentUser;
@@ -68,6 +72,17 @@ public class RentUserController {
     @RequestMapping(value = "/rentUsers/delete/{rentUserId}")
     public void deleteRentUser(@PathVariable("rentUserId") Long rentUserId) {
         userService.deleteUser(rentUserId);
-        //return "redirect:/rentUsers";
+    }
+
+    @RequestMapping(value = "/rentUser/login/{login}")
+    public RentUser getUserByLogin(@PathVariable("login") String login) {
+        RentUser rentUser = this.userService.getUserByLogin(login);
+
+        if(rentUser == null)
+        {
+            throw new UserNotFoundException(login, "/rentUser/%d".formatted(rentUser));
+        }
+
+        return rentUser;
     }
 }

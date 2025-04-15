@@ -9,13 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "RentUser")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RentUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,14 +34,9 @@ public class RentUser {
 
     @Column(nullable = false)
 	private String surname;
-
-    public RentUser(long id, String login, String password, String name, String surname) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-    }
+    
+    @Column(nullable = false, name = "rent_user_role")
+	private String role;
 
     @JsonIgnore
     @JsonProperty(value = "password")
