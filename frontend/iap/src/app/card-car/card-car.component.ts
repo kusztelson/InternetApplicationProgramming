@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 export class CardCarComponent {
   @Input() car!: Car;
   @Input() showRentButton: boolean = true;
+  @Input() showEditButton: boolean = false;
   constructor(private router: Router) {}
 
   onRentClick(carId: number) {

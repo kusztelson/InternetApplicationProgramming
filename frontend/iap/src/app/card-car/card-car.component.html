@@ -25,6 +25,9 @@
     @if (showRentButton){
     <mat-card-actions>
       <button mat-button color="primary" (click)="onRentClick(car.id)">RENT</button>
-    </mat-card-actions>
-  }
+    </mat-card-actions>}
+    @if (showEditButton){
+      <mat-card-actions>
+        <button mat-button color="primary">EDIT</button>
+      </mat-card-actions>}
   </mat-card>

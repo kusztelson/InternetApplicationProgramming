@@ -1,9 +1,21 @@
-<div class="object-list">
-<ng-container *ngIf="car | async as car">
-    <app-card-car [car]="car" [showRentButton]="false"></app-card-car>
-
-</ng-container>
-
+<div class = "containter">    
+    
+    <ng-container *ngIf="car | async as car">
+        <app-card-car [car]="car" [showRentButton]="false"></app-card-car>
+    </ng-container>
+    <ng-container *ngIf="car | async as car">
+        <app-card-car [car]="car" [showRentButton]="false"></app-card-car>
+    </ng-container>
 </div>
-
-  
+<div class = "date-picker">
+<mat-form-field>
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date">
+      <input matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+</div>
