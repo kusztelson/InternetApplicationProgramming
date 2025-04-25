@@ -44,6 +44,11 @@ public class ReservationController {
         return ReservationList;
     }
 
+    @RequestMapping(value = "/reservations/user/{userId}")
+    public List<Reservation> getReservationsForUser(@PathVariable Long userId) {
+        return reservationService.getReservationsForUser(userId);
+    }
+
     @RequestMapping(value = "/addReservation", method = RequestMethod.POST)
     public Reservation addReservation(@RequestBody ReservationRequest reservation) {        
         var newReservation = reservationService.addReservation(reservation);
