@@ -17,6 +17,8 @@ import { map } from 'rxjs/operators';
 import {MatTableModule} from '@angular/material/table';
 import { tap } from 'rxjs/operators'
 import Reservation from '../reservations/reservation';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-rent',
   imports: [CommonModule,
@@ -40,9 +42,10 @@ export class RentComponent {
   car!: Observable<Car>
   reservations$?: Observable<Reservation[]>
   displayedColumns: string[] = ['startDate', 'endDate']; 
-
+  startDate: Date | null = null;
+  endDate: Date | null = null;
   
-  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService) {}
+  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService,private router: Router) {}
   ngOnInit(): void {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
     this.car = this.carsService.getCarById(this.carId)
@@ -51,8 +54,13 @@ export class RentComponent {
        map((reservations: Reservation[]) =>
          reservations.filter(r => r.carId.id === this.carId)
        ))
-    
-      
+    }
+  saveReservation() {
+    console.log("Rower")
+    console.log('Start:', this.startDate);
+    console.log('End:', this.endDate);
+    this.router.navigate(['/reservations'])
+    // You can now send these dates to your backend or use them in logic
   }
   
   
