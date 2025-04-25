@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car',
@@ -26,7 +27,7 @@ export class CarEditComponent {
   newPrice: number = 0.0
   car$?: Observable<Car>
 
-    constructor(private service: CarsService) {}
+    constructor(private service: CarsService, private router: Router) {}
     
     ngOnInit(): void {
       this.car$ = this.service.getCarById(this.carId)
@@ -48,5 +49,8 @@ export class CarEditComponent {
           this.priceInput = ""
         }
       )
+      this.router.navigate(['/cars']).then(() => {
+        window.location.reload(); 
+      });
     }
 }

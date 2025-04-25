@@ -16,7 +16,7 @@ import { ReservationsService } from '../reservations/reservations.service';
 import { map } from 'rxjs/operators';
 import {MatTableModule} from '@angular/material/table';
 import { tap } from 'rxjs/operators'
-import Reservation from '../reservation/reservation';
+import Reservation from '../reservations/reservation';
 @Component({
   selector: 'app-rent',
   imports: [CommonModule,
