@@ -35,7 +35,8 @@ export class CarEditComponent {
     parseInputToNumber() {
       try
       {
-        this.newPrice = parseFloat(this.priceInput)
+        let replace_msg = this.priceInput.replace(',','.')
+        this.newPrice = parseFloat(replace_msg)
       }
       catch {}
     }
