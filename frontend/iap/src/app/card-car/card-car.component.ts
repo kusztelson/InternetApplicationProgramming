@@ -19,4 +19,8 @@ export class CardCarComponent {
   onRentClick(carId: number) {
     this.router.navigate(['/cars/rent', carId]);
   }
+
+  editCar(carId: number) {
+    this.router.navigate(['/cars/rent', carId]);
+  }
 }
