@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReservationComponent } from '../reservation/reservation.component';
 import { Observable } from 'rxjs';
-import Reservation from '../reservation/reservation';
+import Reservation from './reservation';
 // import { ReservationsService } from '../reservation/reservation.service';
 import { ReservationsService } from './reservations.service';
 

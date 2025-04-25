@@ -21,6 +21,6 @@ export class CardCarComponent {
   }
 
   editCar(carId: number) {
-    this.router.navigate(['/cars/rent', carId]);
+    this.router.navigate(['/cars/edit', carId]);
   }
 }

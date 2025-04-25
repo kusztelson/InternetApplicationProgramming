@@ -25,9 +25,10 @@
     @if (showRentButton){
     <mat-card-actions>
       <button mat-button color="primary" (click)="onRentClick(car.id)">RENT</button>
+      @if (showEditButton){
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="editCar(car.id)">EDIT</button>
+        </mat-card-actions>}
     </mat-card-actions>}
-    @if (showEditButton){
-      <mat-card-actions>
-        <button mat-button color="primary" (click)="editCar(car.id)">EDIT</button>
-      </mat-card-actions>}
+
   </mat-card>
