@@ -80,7 +80,7 @@ public class CarController {
         return showCar(carId);
     }
 
-    @RequestMapping(value = "/cars/edit/{carId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/cars/edit/{carId}", method = RequestMethod.PUT)
     public Car saveCarEditChanges(@RequestBody Car car) {
         try
         {

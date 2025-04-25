@@ -27,6 +27,6 @@ export class CarsService {
 
   saveCarChanges(car: Car, priceInput: number): Observable<Car> {
     car.pricePerDay = priceInput
-    return this.http.post<Car>(`${this.apiUrl}/cars/edit/${car.id}`, car, this.httpOptions);
+    return this.http.put<Car>(`${this.apiUrl}/cars/edit/${car.id}`, car, this.httpOptions);
   }
 }
