@@ -5,15 +5,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.lodz.p.iap.domain.Reservation;
+import pl.lodz.p.iap.domain.ReservationRequest;
 import pl.lodz.p.iap.exceptions.ReservationNotFoundException;
-import pl.lodz.p.iap.exceptions.UserNotFoundException;
 import pl.lodz.p.iap.service.ReservationService;
 
 @RestController
@@ -45,29 +45,9 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/addReservation", method = RequestMethod.POST)
-    public Object addReservation(@ModelAttribute("reservation") Reservation reservation) {
-        System.out.println("Car: " + reservation.getCarId() +
-                " User: " + reservation.getUserId() + " Start date: " + reservation.getStartDate() +
-                " End date: " + reservation.getEndDate()) ;
-
-        try
-        {
-            if (reservation.getId() == 0)
-            {
-                reservationService.addReservation(reservation);
-            }
-            else
-            {
-                reservationService.editReservation(reservation);
-            }
-        }
-        catch(Exception e)
-        {
-            Long reservationId = reservation.getId();
-            throw new UserNotFoundException(reservationId, "/addReservation");
-        }
-
-        return reservation;
+    public Reservation addReservation(@RequestBody ReservationRequest reservation) {        
+        var newReservation = reservationService.addReservation(reservation);
+        return newReservation;
     }
 
     @RequestMapping(value = "/reservations/delete/{reservationId}")

@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import Login from './login';
-
-type IRole = "ROLE_USER" | "ROLE_ADMIN" | "ROLE_MANAGER"
+import User, { IRole } from '../core/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ type IRole = "ROLE_USER" | "ROLE_ADMIN" | "ROLE_MANAGER"
 export class LoginService {
 
   private _authorization?: string;
-  private _user?: { id: string; role: IRole};
+  private _user?: User;
 
   constructor(private http: HttpClient) { }
 
@@ -38,8 +37,17 @@ export class LoginService {
     }
   }
 
+  public getUser(): User | null {
+    if(this._user) {
+      return this._user;
+    }
+    else {
+      return null;
+    }
+  }
+
   private getRole(username: string) {
-    this.http.get<{ id: string; role: IRole}>(environment.apiUrl + `rentUser/login/${username}`)
+    this.http.get<User>(environment.apiUrl + `rentUser/login/${username}`)
       .subscribe(user => this._user = {...user});
   }
 }
