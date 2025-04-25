@@ -1,21 +1,47 @@
-<div class = "containter">    
-    
-    <ng-container *ngIf="car | async as car">
-        <app-card-car [car]="car" [showRentButton]="false"></app-card-car>
-    </ng-container>
-    <ng-container *ngIf="car | async as car">
-        <app-card-car [car]="car" [showRentButton]="false"></app-card-car>
-    </ng-container>
-</div>
-<div class = "date-picker">
-<mat-form-field>
-    <mat-label>Enter a date range</mat-label>
-    <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date">
-      <input matEndDate placeholder="End date">
-    </mat-date-range-input>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
-  </mat-form-field>
+<div class="container">
+  <ng-container *ngIf="car | async as car">
+    <!-- Flexbox row for 3 boxes -->
+    <div class="row">
+      <!-- Box 1: Car Card -->
+      <div class="box">
+        <app-card-car [car]="car" [showRentButton]="true"></app-card-car>
+      </div>
+
+      <!-- Box 2: Reservations Table -->
+      <div class="box">
+        <ng-container *ngIf="reservations$ | async as reservations; else noReservations">
+          <table mat-table [dataSource]="reservations" class="mat-elevation-z8">
+            <!-- Columns -->
+            <ng-container matColumnDef="startDate">
+              <th mat-header-cell *matHeaderCellDef> Start Date </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.startDate }} </td>
+            </ng-container>
+            <ng-container matColumnDef="endDate">
+              <th mat-header-cell *matHeaderCellDef> End Date </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.endDate }} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </ng-container>
+        <ng-template #noReservations>
+          <p>No reservations available</p>
+        </ng-template>
+      </div>
+
+      <!-- Box 3: (Add your 3rd component here) -->
+      <div class="box">
+        <mat-form-field>
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date">
+            <input matEndDate placeholder="End date">
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+    </div>
+  </ng-container>
 </div>

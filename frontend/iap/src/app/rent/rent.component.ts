@@ -12,7 +12,11 @@ import { CardCarComponent } from '../card-car/card-car.component';
 import { ActivatedRoute } from '@angular/router';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import Reservation from '../reservations/reservation';
+import { ReservationsService } from '../reservations/reservations.service';
+import { map } from 'rxjs/operators';
+import {MatTableModule} from '@angular/material/table';
+import { tap } from 'rxjs/operators'
 @Component({
   selector: 'app-rent',
   imports: [CommonModule,
@@ -22,7 +26,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatButtonModule,
     MatCardModule,
     CardCarComponent,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatTableModule
     ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './rent.component.html',
@@ -33,10 +38,27 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 export class RentComponent {
   carId!: number
   car!: Observable<Car>
+  reservations$?: Observable<Reservation[]>
+  displayedColumns: string[] = ['startDate', 'endDate']; 
+
   
-  constructor(private route: ActivatedRoute,private service: CarsService) {}
+  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService) {}
   ngOnInit(): void {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
-    this.car = this.service.getCarById(this.carId)
+    this.car = this.carsService.getCarById(this.carId)
+    this.reservations$ = this.reservationsService.getReservations().pipe(
+      tap(reservations => console.log('Reservations data:', reservations))).pipe(
+       map((reservations: Reservation[]) =>
+         reservations.filter(r => r.carId.id === this.carId)
+       ))
+    
+      
   }
+  
+  
 }
+
+
+
+  
+
