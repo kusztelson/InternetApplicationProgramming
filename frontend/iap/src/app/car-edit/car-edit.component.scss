@@ -1,0 +1,39 @@
+.card-edit-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+  
+  .car-edit-card {
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+  
+  .car-image {
+      padding: 16px;
+    }
+  
+  .car-price-input {
+    min-width: 150px;
+    //max-width: 500px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: max;
+  }
+  
+  .submit-changes-footer {
+      min-width: 150px;
+      //max-width: 500px;
+      padding: 16px;
+      padding-top: 0px;
+      width: max;
+    }
+  
+  .submit-button {
+      min-width: 150px;
+      //max-width: 500px;
+      width: 100%;
+  }
+  
+    

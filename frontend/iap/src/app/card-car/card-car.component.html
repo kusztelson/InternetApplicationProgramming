@@ -28,6 +28,6 @@
     </mat-card-actions>}
     @if (showEditButton){
       <mat-card-actions>
-        <button mat-button color="primary">EDIT</button>
+        <button mat-button color="primary" (click)="editCar(car.id)">EDIT</button>
       </mat-card-actions>}
   </mat-card>

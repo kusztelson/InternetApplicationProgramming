@@ -12,11 +12,11 @@ import { CardCarComponent } from '../card-car/card-car.component';
 import { ActivatedRoute } from '@angular/router';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import Reservation from '../reservations/reservation';
 import { ReservationsService } from '../reservations/reservations.service';
 import { map } from 'rxjs/operators';
 import {MatTableModule} from '@angular/material/table';
 import { tap } from 'rxjs/operators'
+import Reservation from '../reservation/reservation';
 @Component({
   selector: 'app-rent',
   imports: [CommonModule,

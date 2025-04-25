@@ -46,6 +46,7 @@ public class SecurityConfig {
                     .requestMatchers("/reservation/**").permitAll()
                     .requestMatchers("/addReservation").permitAll()
                     .requestMatchers("/cars").permitAll()
+                    .requestMatchers("/cars/**").permitAll()
                     .requestMatchers("/car/**").permitAll()
                     .requestMatchers("/addCar").permitAll()
                     .anyRequest().authenticated()       // Secure all other endpoints

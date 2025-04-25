@@ -58,6 +58,5 @@ public class ReservationController {
     @RequestMapping(value = "/reservations/delete/{reservationId}")
     public void deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
-        //return "redirect:/reservations";
     }
 }

@@ -7,14 +7,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.lodz.p.iap.domain.Car;
 import pl.lodz.p.iap.exceptions.CarNotFoundException;
-import pl.lodz.p.iap.exceptions.UserNotFoundException;
 import pl.lodz.p.iap.service.CarService;
+
 
 @RestController
 public class CarController {
@@ -25,9 +26,8 @@ public class CarController {
         this.carService = carService;
     }
 
-    //Rodzielić na cars i car/{carId}
     @RequestMapping(value = "/car/{carId}")
-    public Car showCar(HttpServletRequest request, @PathVariable("carId") Long carId) {
+    public Car showCar(@PathVariable("carId") Long carId) {
         Car foundCar = null;
         foundCar = carService.getCar(carId);
         
@@ -64,7 +64,7 @@ public class CarController {
         catch(Exception e)
         {
             Long carId = car.getId();
-            throw new UserNotFoundException(carId, "/addCar");
+            throw new CarNotFoundException(carId, "/addCar");
         }
 
         return car;
@@ -74,4 +74,25 @@ public class CarController {
     public void deleteUser(@PathVariable("carId") Long carId) {
         carService.deleteCar(carId);
     }
+
+    @RequestMapping(value = "/cars/edit/{carId}", method = RequestMethod.GET)
+    public Car showEditedCar(@PathVariable("carId") Long carId) {
+        return showCar(carId);
+    }
+
+    @RequestMapping(value = "/cars/edit/{carId}", method = RequestMethod.PUT)
+    public Car saveCarEditChanges(@RequestBody Car car) {
+        try
+        {
+            carService.editCar(car);
+        }
+        catch(Exception e)
+        {
+            Long carId = car.getId();
+            throw new CarNotFoundException(carId, "/cars/edit/%d".formatted(carId));
+        }
+
+        return car;
+    }
+    
 }
