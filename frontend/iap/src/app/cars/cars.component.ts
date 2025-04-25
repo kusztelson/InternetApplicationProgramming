@@ -1,12 +1,12 @@
-import {ChangeDetectionStrategy, Component,OnInit} from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import {Component,OnInit} from '@angular/core';
 import { CarsService } from './cars.service';
 import { Car } from './car.model';
+import { CardCarComponent } from '../card-car/card-car.component';
+
 
 @Component({
   selector: 'app-cars',
-  imports: [MatCardModule, MatButtonModule],
+  imports: [CardCarComponent],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss',
 })
