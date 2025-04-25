@@ -11,4 +11,5 @@ public interface ReservationService {
     public List<Reservation> listReservation();
     public void deleteReservation(long id);
     public Reservation getReservation(long id);
+    public List<Reservation> getReservationsForUser(long userId);
 }
