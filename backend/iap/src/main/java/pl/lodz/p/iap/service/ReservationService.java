@@ -3,9 +3,10 @@ package pl.lodz.p.iap.service;
 import java.util.List;
 
 import pl.lodz.p.iap.domain.Reservation;
+import pl.lodz.p.iap.domain.ReservationRequest;
 
 public interface ReservationService {
-    public void addReservation(Reservation reservation);
+    public Reservation addReservation(ReservationRequest reservation);
     public void editReservation(Reservation reservation);
     public List<Reservation> listReservation();
     public void deleteReservation(long id);

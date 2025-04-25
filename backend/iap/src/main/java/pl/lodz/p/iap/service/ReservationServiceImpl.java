@@ -7,20 +7,32 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import pl.lodz.p.iap.domain.Reservation;
+import pl.lodz.p.iap.domain.ReservationRequest;
+import pl.lodz.p.iap.repository.CarRepository;
 import pl.lodz.p.iap.repository.ReservationRepository;
+import pl.lodz.p.iap.repository.UserRepository;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
     private ReservationRepository reservationRepository;
+    private CarRepository carRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public ReservationServiceImpl(ReservationRepository reservationRepository) {
+    public ReservationServiceImpl(
+            ReservationRepository reservationRepository,
+            CarRepository carRepository,
+            UserRepository userRepository) {
         this.reservationRepository = reservationRepository;
+        this.carRepository = carRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
-    public void addReservation(Reservation reservation) {
-        reservationRepository.save(reservation);
+    public Reservation addReservation(ReservationRequest reservation) {
+        var car = carRepository.findById(reservation.getCarId());
+        var user = userRepository.findById(reservation.getUserId());
+        return reservationRepository.save(new Reservation(0, car, user, reservation.getStartDate(), reservation.getEndDate()));
     }
 
     @Transactional

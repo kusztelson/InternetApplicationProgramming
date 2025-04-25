@@ -1,0 +1,27 @@
+.container {
+  padding: 16px;
+}
+
+.row {
+  display: flex;          /* Flexbox layout */
+  gap: 20px;              /* Spacing between boxes */
+}
+
+.box {
+  flex: 1;                /* Each box takes equal width */
+  min-width: 0;           /* Prevents flexbox overflow issues */
+  padding: 16px;          /* Inner spacing */
+  background: white;      /* Optional: Background color */
+  border-radius: 8px;     /* Optional: Rounded corners */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Shadow */
+}
+
+/* Responsive: Stack on small screens */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  .box {
+    width: 100%; /* Full width on mobile */
+  }
+}

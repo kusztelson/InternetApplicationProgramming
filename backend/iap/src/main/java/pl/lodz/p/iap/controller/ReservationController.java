@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.lodz.p.iap.domain.Reservation;
+import pl.lodz.p.iap.domain.ReservationRequest;
 import pl.lodz.p.iap.exceptions.ReservationNotFoundException;
 import pl.lodz.p.iap.service.ReservationService;
 
@@ -44,29 +45,9 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/addReservation", method = RequestMethod.POST)
-    public Object addReservation(@RequestBody Reservation reservation) {
-        System.out.println("Car: " + reservation.getCarId() +
-                " User: " + reservation.getUserId() + " Start date: " + reservation.getStartDate() +
-                " End date: " + reservation.getEndDate()) ;
-
-        try
-        {
-            if (reservation.getId() == 0)
-            {
-                reservationService.addReservation(reservation);
-            }
-            else
-            {
-                reservationService.editReservation(reservation);
-            }
-        }
-        catch(Exception e)
-        {
-            Long reservationId = reservation.getId();
-            throw new ReservationNotFoundException(reservationId, "/addReservation");
-        }
-
-        return reservation;
+    public Reservation addReservation(@RequestBody ReservationRequest reservation) {        
+        var newReservation = reservationService.addReservation(reservation);
+        return newReservation;
     }
 
     @RequestMapping(value = "/reservations/delete/{reservationId}")
