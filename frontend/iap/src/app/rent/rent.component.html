@@ -7,8 +7,10 @@
         <app-card-car [car]="car" [showRentButton]="true"></app-card-car>
       </div>
 
+
       <!-- Box 2: Reservations Table -->
       <div class="box">
+        <p>Bookings for selected car.</p>
         <ng-container *ngIf="reservations$ | async as reservations; else noReservations">
           <table mat-table [dataSource]="reservations" class="mat-elevation-z8">
             <!-- Columns -->
@@ -25,7 +27,7 @@
           </table>
         </ng-container>
         <ng-template #noReservations>
-          <p>No reservations available</p>
+          <p>No bookings for this car, pick any date range you want./p>
         </ng-template>
       </div>
 
