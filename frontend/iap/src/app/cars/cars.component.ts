@@ -3,6 +3,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { CarsService } from './cars.service';
 import { Car } from './car.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cars',
@@ -15,7 +16,8 @@ export class CarsComponent  implements OnInit {
   isLoading = true;
   errorMessage = '';
   
-  constructor(private carsService: CarsService) { }
+  constructor(private carsService: CarsService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadCars();
@@ -34,5 +36,9 @@ export class CarsComponent  implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  editCar(car: Car): void {
+    this.router.navigate(['cars/edit/', car.id])
   }
 }

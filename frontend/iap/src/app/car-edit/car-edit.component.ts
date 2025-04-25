@@ -17,10 +17,10 @@ import {MatCardModule} from '@angular/material/card';
      FormsModule,
      MatButtonModule,
      MatCardModule],
-  templateUrl: './car.component.html',
-  styleUrl: './car.component.scss'
+  templateUrl: './car-edit.component.html',
+  styleUrl: './car-edit.component.scss'
 })
-export class CarComponent {
+export class CarEditComponent {
   @Input() carId!: number
   priceInput: string = ""
   newPrice: number = 0.0
