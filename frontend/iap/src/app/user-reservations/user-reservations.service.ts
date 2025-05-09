@@ -12,7 +12,7 @@ export class UserReservationsService {
   constructor(private http: HttpClient) { }
   
     public getUserReservations(userId: number): Observable<Reservation[]> {
-      return this.http.get<Reservation[]>(environment.apiUrl + "reservations/user/${userId]")
+      return this.http.get<any[]>(environment.apiUrl + `reservations/user/${userId}`)
     }
 
     public deleteReservation(id: number) {
