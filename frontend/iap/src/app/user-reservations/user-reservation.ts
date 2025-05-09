@@ -5,7 +5,7 @@ export default interface Reservation {
 
 	carId: Car;
 
-	// RentUser userId;
+	// RentUser: userId;
 
 	startDate: string;
 

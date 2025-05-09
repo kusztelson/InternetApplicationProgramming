@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import Reservation from './user-reservation';
 // import { ReservationsService } from '../reservation/reservation.service';
 import { UserReservationsService } from './user-reservations.service';
+import { LoginService } from '../login/login.service';
 
 
 @Component({
@@ -16,9 +17,11 @@ import { UserReservationsService } from './user-reservations.service';
 export class UserReservationsComponent {
   reservations$?: Observable<Reservation[]>
     
-  constructor(private service: UserReservationsService) {}
+  constructor(private service: UserReservationsService, private loginService: LoginService) {}
   
   ngOnInit(): void {
+    let user = this.loginService.getUser()
+    let userId = user!.id
     this.reservations$ = this.service.getUserReservations(1)
   }
 
