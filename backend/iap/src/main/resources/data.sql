@@ -6,7 +6,6 @@ VALUES ('admin', '$2a$12$AX5RoIUobp0gohFeJZNUQ./9M8ghyVVumovA0oT9vP30DYA6ChyDu',
 INSERT INTO Rent_User (login, password, name, surname, rent_user_role) 
 VALUES ('user1', '$2a$12$AX5RoIUobp0gohFeJZNUQ./9M8ghyVVumovA0oT9vP30DYA6ChyDu', 'Robert', 'Przybysz', 'ROLE_USER');
 
-
 INSERT INTO Car (name, picture, price_per_day,category) 
 VALUES ('Volkswagen Golf', 'https://ocs-pl.oktawave.com/v1/AUTH_2887234e-384a-4873-8bc5-405211db13a2/autoblog/2019/10/volkswagen-golf-8-2020-05.jpg', 100.0,'Compact');
 INSERT INTO Car (name, picture, price_per_day,category) 

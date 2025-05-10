@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Input,OnInit, Output } from '@angular/core';
+import { Component, Input,OnInit } from '@angular/core';
 import { Car } from '../cars/car.model';
 import { Router } from '@angular/router';
 
@@ -14,9 +14,6 @@ export class CardCarComponent {
   @Input() car!: Car;
   @Input() showRentButton: boolean = true;
   @Input() showEditButton: boolean = false;
-  @Input() rentScreen: boolean = false;
-  @Output() saveReservationClicked = new EventEmitter<void>();
-
   constructor(private router: Router) {}
 
   onRentClick(carId: number) {
@@ -25,8 +22,5 @@ export class CardCarComponent {
 
   editCar(carId: number) {
     this.router.navigate(['/cars/edit', carId]);
-  }
-  onReservationClick() {
-    this.saveReservationClicked.emit(); 
   }
 }
