@@ -13,6 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReservationsService } from '../reservations/reservations.service';
+import { LoginService } from '../login/login.service';
+
 import { map } from 'rxjs/operators';
 import {MatTableModule} from '@angular/material/table';
 import { tap } from 'rxjs/operators'
@@ -39,10 +41,12 @@ export class RentComponent {
   carId!: number
   car!: Observable<Car>
   reservations$?: Observable<Reservation[]>
-  displayedColumns: string[] = ['startDate', 'endDate']; 
+  displayedColumns: string[] = ['startDate', 'endDate']
+  startDate: Date | null = null;
+  endDate: Date | null = null; 
+  userId!: undefined | number;
 
-  
-  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService) {}
+  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService, private loginService: LoginService) {}
   ngOnInit(): void {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
     this.car = this.carsService.getCarById(this.carId)
@@ -51,9 +55,9 @@ export class RentComponent {
        map((reservations: Reservation[]) =>
          reservations.filter(r => r.carId.id === this.carId)
        ))
-    
-      
-  }
+    this.userId = this.loginService.getUser()?.id
+
+    }
   
   
 }

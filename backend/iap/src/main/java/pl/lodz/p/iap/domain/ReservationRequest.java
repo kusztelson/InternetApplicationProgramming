@@ -14,3 +14,4 @@ public class ReservationRequest {
 	private Date startDate;
 	private Date endDate;
 }
+

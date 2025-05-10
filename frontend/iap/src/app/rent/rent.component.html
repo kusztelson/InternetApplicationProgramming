@@ -4,7 +4,7 @@
     <div class="row">
       <!-- Box 1: Car Card -->
       <div class="box">
-        <app-card-car [car]="car" [showRentButton]="true"></app-card-car>
+        <app-card-car [car]="car" [showRentButton]="false"></app-card-car>
       </div>
 
 
@@ -36,13 +36,17 @@
         <mat-form-field>
           <mat-label>Enter a date range</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate placeholder="Start date">
-            <input matEndDate placeholder="End date">
+            <input matStartDate placeholder="Start date"[(ngModel)]="startDate" name="start">
+            <input matEndDate placeholder="End date" [(ngModel)]="endDate" name="end">
           </mat-date-range-input>
           <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
+         <mat-card-footer class="submit-changes-footer">
+          <button mat-raised-button class="submit-button" climat-raised-button>BOOK</button>
+          </mat-card-footer>
+
       </div>
     </div>
   </ng-container>
