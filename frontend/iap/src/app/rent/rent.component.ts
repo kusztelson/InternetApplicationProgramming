@@ -14,7 +14,8 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReservationsService } from '../reservations/reservations.service';
 import { LoginService } from '../login/login.service';
-
+import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 import { map } from 'rxjs/operators';
 import {MatTableModule} from '@angular/material/table';
 import { tap } from 'rxjs/operators'
@@ -46,23 +47,76 @@ export class RentComponent {
   endDate: Date | null = null; 
   userId!: undefined | number;
 
-  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService, private loginService: LoginService) {}
+  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService, private loginService: LoginService,private http: HttpClient) {}
   ngOnInit(): void {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
-    this.car = this.carsService.getCarById(this.carId)
+    this.car = this.carsService.getCarById(this.carId);
     this.reservations$ = this.reservationsService.getReservations().pipe(
-      tap(reservations => console.log('Reservations data:', reservations))).pipe(
-       map((reservations: Reservation[]) =>
-         reservations.filter(r => r.carId.id === this.carId)
-       ))
-    this.userId = this.loginService.getUser()?.id
+      tap(reservations => console.log('Reservations data:', reservations)),
+      map((reservations: Reservation[]) =>
+        reservations.filter(r => r.carId.id === this.carId)
+      )
+    );
+    this.userId = this.loginService.getUser()?.id;
+  }
 
+  makeReservation(reservations: Reservation[]) {
+  if (!this.startDate || !this.endDate || !this.userId) {
+    alert("Please select both dates and make sure you're logged in.");
+    return;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // remove time portion for accurate comparison
+
+  if (this.startDate < today || this.endDate < today) {
+    alert("Reservation dates must be in the future.");
+    return;
+  }
+
+  if (this.endDate < this.startDate) {
+    alert("End date must be after start date.");
+    return;
+  }
+
+  const isConflict = reservations.some(res => {
+    const existingStart = new Date(res.startDate);
+    const existingEnd = new Date(res.endDate);
+    return (
+      this.startDate! <= existingEnd &&
+      this.endDate! >= existingStart
+    );
+  });
+
+  if (isConflict) {
+    alert("Selected dates overlap with an existing reservation.");
+    return;
+  }
+
+  const request = {
+    carId: this.carId,
+    userId: this.userId,
+    startDate: formatDate(this.startDate!, 'yyyy-MM-dd', 'en-US'),
+    endDate: formatDate(this.endDate!, 'yyyy-MM-dd', 'en-US'),
+  };
+
+  this.http.post('http://localhost:8080/addReservation', request).subscribe({
+    next: () => {
+      alert("Reservation created successfully!");
+      // Optionally reset form or refresh reservations
+    },
+    error: err => {
+      console.error(err);
+      alert("Error creating reservation.");
+      console.log(request);
     }
-  
-  
+  });
+}
+onBookClick() {
+  this.reservations$?.subscribe(res => this.makeReservation(res));
 }
 
-
+}
 
   
 

@@ -44,7 +44,12 @@
           <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
          <mat-card-footer class="submit-changes-footer">
-          <button mat-raised-button class="submit-button" climat-raised-button>BOOK</button>
+          <button mat-raised-button color="primary"
+        [disabled]="!startDate || !endDate"
+        (click)="onBookClick()">
+  BOOK
+</button>
+
           </mat-card-footer>
 
       </div>
