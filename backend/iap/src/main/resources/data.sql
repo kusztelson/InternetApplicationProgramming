@@ -32,7 +32,6 @@ INSERT INTO Car (name, picture, price_per_day,category)
 VALUES ('Hyundai i20', 'https://kaizenrent.pl/sites/default/files/styles/galeria_powiekszony/public/obraz_pgf/hyundai-novi-i20-12-dohc-84ks-style-gbpz-benzin-637467562664120194_1600_900.jpeg.webp?itok=xhCnqqfS', 60.3,'Mini');
 INSERT INTO Car (name, picture, price_per_day,category) 
 VALUES ('MG HS', 'https://mg.grupabemo.pl/wp-content/uploads/2024/11/diamond-red.jpg', 110.4,'Compact SUV');
-INSERT INTO Car (name, picture, price_per_day,category) 
 
 
 
