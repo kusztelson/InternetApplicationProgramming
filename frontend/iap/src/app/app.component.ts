@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HelloService } from './hello/hello.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { LoginService } from './login/login.service';
 
 
 @Component({
@@ -18,10 +18,8 @@ export class AppComponent implements OnInit {
   title = 'iap';
   hello$?: Observable<String>;
 
-  constructor(private helloService: HelloService) {
+  constructor(public loginService: LoginService) {
   }
 
-  ngOnInit(): void {
-    this.hello$ = this.helloService.getHello()
-  }
+  ngOnInit(): void { }
 }

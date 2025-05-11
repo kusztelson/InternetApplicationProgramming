@@ -1,0 +1,13 @@
+hello
+<ng-container *ngIf="reservations$ | async as reservations">
+    <ng-container *ngFor="let reservation of reservations; index as i">
+        <app-reservation
+            [car]="reservation.carId" 
+            [reservationId]="reservation.id" 
+            [reservationStartDate]="reservation.startDate" 
+            [reservationEndDate]="reservation.endDate" 
+            (cancelButtonClicked)="deleteReservation(reservation.id)"
+            (cancelButtonClicked)="deleteReservationInView(reservations, reservation)">
+        </app-reservation>
+    </ng-container>
+</ng-container>
