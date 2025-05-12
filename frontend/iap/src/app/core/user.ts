@@ -1,4 +1,4 @@
-export type IRole = "ROLE_USER" | "ROLE_ADMIN" | "ROLE_MANAGER"
+export type IRole = "ROLE_USER" | "ROLE_ADMIN"
 
 export default interface User {
     id: number;
