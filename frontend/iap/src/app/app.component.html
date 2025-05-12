@@ -8,6 +8,7 @@
   <button routerLink="/cars" routerLinkActive="active" mat-button>Cars</button>
   <button routerLink="/reservations" routerLinkActive="active" mat-button>Reservations</button>
   <button routerLink="/hello" routerLinkActive="active" mat-button>Hello</button>
+  <button [routerLink]="'/reservations/user/' + loginService.getUser()?.id" routerLinkActive="active" mat-button>My reservations</button>
 </mat-toolbar>
 <div class="content">
   <!-- https://angular.dev/guide/routing/common-router-tasks#add-your-routes-to-your-application -->
