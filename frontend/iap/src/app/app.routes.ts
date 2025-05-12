@@ -6,12 +6,13 @@ import { RentComponent } from './rent/rent.component';
 import { CarEditComponent } from './car-edit/car-edit.component';
 import { LoginComponent } from './login/login.component';
 import { userGuard } from './core/user.guard';
+import { adminGuard } from './core/admin.guard';
 
 export const routes: Routes = [
     {path: "", component: LoginComponent},
     {path: "hello", component: HelloComponent, canActivate: [userGuard]},
     {path: "cars", component: CarsComponent},
-    {path: "reservations", component: ReservationsComponent},
-    {path: "cars/rent/:id", component: RentComponent},
-    {path: "cars/edit/:carId", component: CarEditComponent}
+    {path: "reservations", component: ReservationsComponent, canActivate: [adminGuard]},
+    {path: "cars/rent/:id", component: RentComponent, canActivate: [userGuard]},
+    {path: "cars/edit/:carId", component: CarEditComponent, canActivate: [adminGuard]}
 ];
