@@ -103,8 +103,9 @@ export class RentComponent {
 
   this.http.post('http://localhost:8080/addReservation', request).subscribe({
     next: () => {
-      alert("Reservation created successfully!");
+      
       this.router.navigate(['reservations/user', this.userId]);
+      alert("Reservation created successfully!");
       // Optionally reset form or refresh reservations
     },
     error: err => {
