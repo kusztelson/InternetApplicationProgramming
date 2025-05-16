@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { map } from 'rxjs/operators';
 import {MatTableModule} from '@angular/material/table';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators'
 import Reservation from '../reservations/reservation';
 @Component({
@@ -47,7 +48,7 @@ export class RentComponent {
   endDate: Date | null = null; 
   userId!: undefined | number;
 
-  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService, private loginService: LoginService,private http: HttpClient) {}
+  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService, private loginService: LoginService,private http: HttpClient,private router: Router) {}
   ngOnInit(): void {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
     this.car = this.carsService.getCarById(this.carId);
@@ -103,6 +104,7 @@ export class RentComponent {
   this.http.post('http://localhost:8080/addReservation', request).subscribe({
     next: () => {
       alert("Reservation created successfully!");
+      this.router.navigate(['reservations/user', this.userId]);
       // Optionally reset form or refresh reservations
     },
     error: err => {
