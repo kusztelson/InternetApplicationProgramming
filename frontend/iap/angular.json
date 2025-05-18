@@ -63,18 +63,35 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "host": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.host.ts"
+                }
+              ]
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "iap:build:production"
+              "buildTarget": "iap:build:production",
+              "port": 4200
             },
             "development": {
-              "buildTarget": "iap:build:development"
+              "buildTarget": "iap:build:development",
+              "port": 4200
+            },
+            "host": {
+              "buildTarget": "iap:build:host",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"

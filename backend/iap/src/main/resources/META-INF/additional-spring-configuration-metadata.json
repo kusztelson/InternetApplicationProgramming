@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "provider.headquarters",
+  "type": "java.lang.Spring",
+  "description": "If true, application runs as a main server"
+}]}
