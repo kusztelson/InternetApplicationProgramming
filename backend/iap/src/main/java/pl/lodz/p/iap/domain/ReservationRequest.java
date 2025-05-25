@@ -13,5 +13,14 @@ public class ReservationRequest {
 	private long userId;
 	private Date startDate;
 	private Date endDate;
+
+	public String toString() {
+        String msg = "";
+        msg += (" Car Id: " + this.carId);
+        msg += (" User Id: " + this.userId);
+        msg += (" Start date: " + this.startDate);
+        msg += (" End date: " + this.endDate);
+        return msg;
+    }
 }
 

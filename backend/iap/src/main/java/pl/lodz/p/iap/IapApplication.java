@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class IapApplication {
 
 	//@Value("${provider.headquarters}")
-	private static boolean isHeadquarters = true;
+	private static boolean isHeadquarters = false;
 
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(IapApplication.class);

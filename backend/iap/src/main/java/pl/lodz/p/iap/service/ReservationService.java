@@ -7,6 +7,7 @@ import pl.lodz.p.iap.domain.ReservationRequest;
 
 public interface ReservationService {
     public Reservation addReservation(ReservationRequest reservation);
+    public void updateReservations(List<ReservationRequest> reservationList);
     public void editReservation(Reservation reservation);
     public List<Reservation> listReservation();
     public void deleteReservation(long id);

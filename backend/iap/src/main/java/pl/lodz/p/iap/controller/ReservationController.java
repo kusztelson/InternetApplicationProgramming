@@ -59,4 +59,10 @@ public class ReservationController {
     public void deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
     }
+
+    @RequestMapping(value = "/syncReservations", method = RequestMethod.POST)
+    public List<ReservationRequest> syncReservation(@RequestBody List<ReservationRequest> reservationList) {        
+        reservationService.updateReservations(reservationList);
+        return reservationList;
+    }
 }

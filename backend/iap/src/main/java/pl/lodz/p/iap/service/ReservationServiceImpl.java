@@ -3,7 +3,6 @@ package pl.lodz.p.iap.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -59,5 +58,13 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> getReservationsForUser(long userId) {
         return reservationRepository.findByUserId(userRepository.findById(userId));
+    }
+
+    @Transactional
+    public void updateReservations(List<ReservationRequest> reservationList) {
+        List<Reservation> presentReservations = reservationRepository.findAll();
+
+        for(ReservationRequest r : reservationList)
+            System.out.println(r);
     }
 }
