@@ -1,14 +1,16 @@
 package pl.lodz.p.iap.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional; 
 import pl.lodz.p.iap.domain.Reservation;
 import pl.lodz.p.iap.domain.ReservationRequest;
+import pl.lodz.p.iap.domain.SyncMessage;
+import pl.lodz.p.iap.host_properties.PropertyHandler;
 import pl.lodz.p.iap.repository.CarRepository;
 import pl.lodz.p.iap.repository.ReservationRepository;
 import pl.lodz.p.iap.repository.UserRepository;
@@ -30,10 +32,19 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Transactional
-    public Reservation addReservation(ReservationRequest reservation) {
+    public Reservation addReservation(ReservationRequest reservation, PropertyHandler propertyHandler) {
         var car = carRepository.findById(reservation.getCarId());
         var user = userRepository.findById(reservation.getUserId());
-        return reservationRepository.save(new Reservation(0, car, user, reservation.getStartDate(), reservation.getEndDate()));
+        Reservation tempReservation = new Reservation(0, car, user, reservation.getStartDate(), reservation.getEndDate());
+        if(propertyHandler != null) {
+            tempReservation.setSyncMessage(SyncMessage.builder()
+                .address(propertyHandler.getAddress())
+                .port(propertyHandler.getPort())
+                .syncTimestamp(LocalDateTime.now())
+                .reservationId(tempReservation)
+                .build());
+        }
+        return reservationRepository.save(tempReservation);
     }
 
     @Transactional
@@ -59,5 +70,13 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> getReservationsForUser(long userId) {
         return reservationRepository.findByUserId(userRepository.findById(userId));
+    }
+
+    @Transactional
+    public void updateReservations(List<ReservationRequest> reservationList) {
+        List<Reservation> presentReservations = reservationRepository.findAll();
+
+        for(ReservationRequest r : reservationList)
+            System.out.println(r);
     }
 }

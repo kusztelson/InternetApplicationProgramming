@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "provider.headquarters",
-  "type": "java.lang.Spring",
-  "description": "If true, application runs as a main server"
-}]}
+{"properties": [
+  {
+    "name": "contact.port",
+    "type": "java.lang.String",
+    "description": "Port of app instanse that should be contacted"
+  },
+  {
+    "name": "contact.address",
+    "type": "java.lang.String",
+    "description": "Address of app instanse that should be contacted"
+  }
+]}

@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.lodz.p.iap.domain.Reservation;
 import pl.lodz.p.iap.domain.ReservationRequest;
 import pl.lodz.p.iap.exceptions.ReservationNotFoundException;
+import pl.lodz.p.iap.host_properties.PropertyHandler;
 import pl.lodz.p.iap.service.ReservationService;
 
 @RestController
 public class ReservationController {
     private ReservationService reservationService;
+    private PropertyHandler propertyHandler;
 
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, PropertyHandler propertyHandler) {
         this.reservationService = reservationService;
+        this.propertyHandler = propertyHandler;
     }
 
     @RequestMapping(value = "/reservation/{reservationId}")
@@ -51,12 +54,18 @@ public class ReservationController {
 
     @RequestMapping(value = "/addReservation", method = RequestMethod.POST)
     public Reservation addReservation(@RequestBody ReservationRequest reservation) {        
-        var newReservation = reservationService.addReservation(reservation);
+        var newReservation = reservationService.addReservation(reservation, propertyHandler);
         return newReservation;
     }
 
     @RequestMapping(value = "/reservations/delete/{reservationId}")
     public void deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
+    }
+
+    @RequestMapping(value = "/syncReservations", method = RequestMethod.POST)
+    public List<ReservationRequest> syncReservation(@RequestBody List<ReservationRequest> reservationList) {        
+        reservationService.updateReservations(reservationList);
+        return reservationList;
     }
 }

@@ -11,10 +11,9 @@ public class SendReservationUpdate {
     
     @Scheduled(fixedRate = 15 * 1000)
     public void reservationUpdate() {
-        System.out.println("Wysłano update rezerwacji do kwatery głównej");
-
         RestClient defaultClient = RestClient.create();
         
+        System.out.println("===============================");
         //String result = defaultClient.get() 
 	    //.uri("http://localhost:8081/cars") 
 	    //.retrieve() 

@@ -47,6 +47,8 @@ public class SecurityConfig {
                     .requestMatchers("/reservations/**").permitAll()
                     .requestMatchers("/reservation/**").permitAll()
                     .requestMatchers("/addReservation").permitAll()
+                    .requestMatchers("/syncReservations").permitAll()
+                    .requestMatchers("/syncMessages").permitAll()
                     .requestMatchers("/cars").permitAll()
                     .requestMatchers("/cars/**").permitAll()
                     .requestMatchers("/car/**").permitAll()
