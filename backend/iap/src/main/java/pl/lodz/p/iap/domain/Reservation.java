@@ -15,7 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PostPersist;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -66,13 +65,5 @@ public class Reservation {
         msg += (" End date: " + this.endDate);
         msg += (" Sync: " + this.syncMessage);
         return msg;
-    }
-
-    @PostPersist
-    public void onPostPersist() {
-        this.syncMessage = new SyncMessage.SyncMessageBuilder()
-                .reservationId(this)
-                .syncTimestamp(LocalDateTime.now())
-                .build();
     }
 }

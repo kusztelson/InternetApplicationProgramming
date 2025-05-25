@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.annotation.PostConstruct;
 import pl.lodz.p.iap.domain.SyncMessage;
 import pl.lodz.p.iap.domain.SyncMessageDTO;
 import pl.lodz.p.iap.repository.SyncMessageRepository;
@@ -30,5 +31,4 @@ public class SyncMesssageController {
         }
         return DTOMessages;
     }
-    
 }

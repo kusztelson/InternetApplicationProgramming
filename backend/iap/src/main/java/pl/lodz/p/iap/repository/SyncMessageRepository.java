@@ -10,8 +10,6 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.time.LocalDateTime;
 
-
-
 @Transactional
 @Repository
 public interface SyncMessageRepository extends JpaRepository<SyncMessage, Long> {

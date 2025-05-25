@@ -11,7 +11,6 @@ import pl.lodz.p.iap.repository.SyncMessageRepository;
 
 @Service
 public class SyncMessageServiceImpl implements SyncMessageService {
-
     private SyncMessageRepository syncMessageRepository;
 
     @Autowired
@@ -21,7 +20,6 @@ public class SyncMessageServiceImpl implements SyncMessageService {
 
     @Transactional
     public void addSync(SyncMessage syncMessage) {
-        
         syncMessageRepository.save(syncMessage);
     }
 
@@ -44,5 +42,4 @@ public class SyncMessageServiceImpl implements SyncMessageService {
     public SyncMessage getSync(long id) {
         return syncMessageRepository.findById(id);
     }
-    
 }
