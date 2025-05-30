@@ -76,7 +76,7 @@
               ]
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "host"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -94,7 +94,7 @@
               "port": 4201
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "host"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
