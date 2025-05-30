@@ -30,7 +30,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Transactional
-    public Reservation addReservation(ReservationRequest reservation, PropertyHandler propertyHandler) {
+    public Reservation addReservation(ReservationRequest reservation) {
         var car = carRepository.findById(reservation.getCarId());
         var user = userRepository.findById(reservation.getUserId());
         Reservation tempReservation = new Reservation(0, car, user, reservation.getStartDate(), reservation.getEndDate());
@@ -60,13 +60,5 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> getReservationsForUser(long userId) {
         return reservationRepository.findByUserId(userRepository.findById(userId));
-    }
-
-    @Transactional
-    public void updateReservations(List<ReservationRequest> reservationList) {
-        List<Reservation> presentReservations = reservationRepository.findAll();
-
-        for(ReservationRequest r : reservationList)
-            System.out.println(r);
     }
 }

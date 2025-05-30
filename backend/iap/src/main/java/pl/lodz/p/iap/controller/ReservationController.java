@@ -54,18 +54,12 @@ public class ReservationController {
 
     @RequestMapping(value = "/addReservation", method = RequestMethod.POST)
     public Reservation addReservation(@RequestBody ReservationRequest reservation) {        
-        var newReservation = reservationService.addReservation(reservation, propertyHandler);
+        var newReservation = reservationService.addReservation(reservation);
         return newReservation;
     }
 
     @RequestMapping(value = "/reservations/delete/{reservationId}")
     public void deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
-    }
-
-    @RequestMapping(value = "/syncReservations", method = RequestMethod.POST)
-    public List<ReservationRequest> syncReservation(@RequestBody List<ReservationRequest> reservationList) {        
-        reservationService.updateReservations(reservationList);
-        return reservationList;
     }
 }
