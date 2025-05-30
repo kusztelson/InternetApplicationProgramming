@@ -22,7 +22,7 @@ export class UserReservationsComponent {
   ngOnInit(): void {
     let user = this.loginService.getUser()
     let userId = user!.id
-    this.reservations$ = this.service.getUserReservations(1)
+    this.reservations$ = this.service.getUserReservations(userId)
   }
 
   deleteReservation(id: number): void {
