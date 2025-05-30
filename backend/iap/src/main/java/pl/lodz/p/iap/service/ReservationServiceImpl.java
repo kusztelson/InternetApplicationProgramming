@@ -1,6 +1,5 @@
 package pl.lodz.p.iap.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional; 
 import pl.lodz.p.iap.domain.Reservation;
 import pl.lodz.p.iap.domain.ReservationRequest;
-import pl.lodz.p.iap.domain.SyncMessage;
 import pl.lodz.p.iap.host_properties.PropertyHandler;
 import pl.lodz.p.iap.repository.CarRepository;
 import pl.lodz.p.iap.repository.ReservationRepository;
@@ -36,14 +34,6 @@ public class ReservationServiceImpl implements ReservationService {
         var car = carRepository.findById(reservation.getCarId());
         var user = userRepository.findById(reservation.getUserId());
         Reservation tempReservation = new Reservation(0, car, user, reservation.getStartDate(), reservation.getEndDate());
-        if(propertyHandler != null) {
-            tempReservation.setSyncMessage(SyncMessage.builder()
-                .address(propertyHandler.getAddress())
-                .port(propertyHandler.getPort())
-                .syncTimestamp(LocalDateTime.now())
-                .reservationId(tempReservation)
-                .build());
-        }
         return reservationRepository.save(tempReservation);
     }
 
