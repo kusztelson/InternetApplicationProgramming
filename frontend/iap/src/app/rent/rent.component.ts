@@ -51,10 +51,16 @@ export class RentComponent {
   ngOnInit(): void {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
     this.car = this.carsService.getCarById(this.carId);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // start of the day 
+
+
+
     this.reservations$ = this.reservationsService.getReservations().pipe(
       tap(reservations => console.log('Reservations data:', reservations)),
       map((reservations: Reservation[]) =>
-        reservations.filter(r => r.carId.id === this.carId)
+        reservations.filter(r => r.carId.id === this.carId &&
+              new Date(r.endDate) >= today)
       )
     );
     this.userId = this.loginService.getUser()?.id;

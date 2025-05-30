@@ -11,7 +11,8 @@
       <!-- Box 2: Reservations Table -->
       <div class="box">
         <p>Bookings for selected car.</p>
-        <ng-container *ngIf="reservations$ | async as reservations; else noReservations">
+        <ng-container *ngIf="(reservations$ | async) as reservations">
+          <ng-container *ngIf="reservations.length > 0; else noReservations">
           <table mat-table [dataSource]="reservations" class="mat-elevation-z8">
             <!-- Columns -->
             <ng-container matColumnDef="startDate">
@@ -25,9 +26,10 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+          </ng-container>
         </ng-container>
         <ng-template #noReservations>
-          <p>No bookings for this car, pick any date range you want./p>
+          <p>No bookings for this car, pick any date range you want.</p>
         </ng-template>
       </div>
 
