@@ -1,8 +1,9 @@
-hello
+
 <ng-container *ngIf="reservations$ | async as reservations">
     <ng-container *ngFor="let reservation of reservations; index as i">
         <app-reservation
             [car]="reservation.carId" 
+            [rentUser]="reservation.userId"
             [reservationId]="reservation.id" 
             [reservationStartDate]="reservation.startDate" 
             [reservationEndDate]="reservation.endDate" 
