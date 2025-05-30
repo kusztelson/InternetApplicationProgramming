@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.lodz.p.iap.domain.Reservation;
 import pl.lodz.p.iap.domain.ReservationRequest;
 import pl.lodz.p.iap.exceptions.ReservationNotFoundException;
+import pl.lodz.p.iap.host_properties.PropertyHandler;
 import pl.lodz.p.iap.service.ReservationService;
 
 @RestController
 public class ReservationController {
     private ReservationService reservationService;
+    private PropertyHandler propertyHandler;
 
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, PropertyHandler propertyHandler) {
         this.reservationService = reservationService;
+        this.propertyHandler = propertyHandler;
     }
 
     @RequestMapping(value = "/reservation/{reservationId}")

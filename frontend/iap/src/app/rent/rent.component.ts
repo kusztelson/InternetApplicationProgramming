@@ -21,6 +21,7 @@ import {MatTableModule} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators'
 import Reservation from '../reservations/reservation';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-rent',
   imports: [CommonModule,
@@ -107,7 +108,7 @@ export class RentComponent {
     endDate: formatDate(this.endDate!, 'yyyy-MM-dd', 'en-US'),
   };
 
-  this.http.post('http://localhost:8080/addReservation', request).subscribe({
+  this.http.post(environment.apiUrl + 'addReservation', request).subscribe({
     next: () => {
       
       this.router.navigate(['reservations/user', this.userId]);

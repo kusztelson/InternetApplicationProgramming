@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional; 
 import pl.lodz.p.iap.domain.Reservation;
 import pl.lodz.p.iap.domain.ReservationRequest;
+import pl.lodz.p.iap.host_properties.PropertyHandler;
 import pl.lodz.p.iap.repository.CarRepository;
 import pl.lodz.p.iap.repository.ReservationRepository;
 import pl.lodz.p.iap.repository.UserRepository;
@@ -32,7 +33,8 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation addReservation(ReservationRequest reservation) {
         var car = carRepository.findById(reservation.getCarId());
         var user = userRepository.findById(reservation.getUserId());
-        return reservationRepository.save(new Reservation(0, car, user, reservation.getStartDate(), reservation.getEndDate()));
+        Reservation tempReservation = new Reservation(0, car, user, reservation.getStartDate(), reservation.getEndDate());
+        return reservationRepository.save(tempReservation);
     }
 
     @Transactional
@@ -59,5 +61,4 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> getReservationsForUser(long userId) {
         return reservationRepository.findByUserId(userRepository.findById(userId));
     }
-    
 }

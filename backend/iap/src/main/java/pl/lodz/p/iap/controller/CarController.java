@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,11 @@ import pl.lodz.p.iap.domain.Car;
 import pl.lodz.p.iap.exceptions.CarNotFoundException;
 import pl.lodz.p.iap.service.CarService;
 
-
+@CrossOrigin
 @RestController
 public class CarController {
     private CarService carService;
-
+    
     @Autowired
     public CarController(CarService carService) {
         this.carService = carService;
