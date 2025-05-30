@@ -18,8 +18,10 @@ import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { map } from 'rxjs/operators';
 import {MatTableModule} from '@angular/material/table';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators'
 import Reservation from '../reservations/reservation';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-rent',
   imports: [CommonModule,
@@ -47,14 +49,20 @@ export class RentComponent {
   endDate: Date | null = null; 
   userId!: undefined | number;
 
-  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService, private loginService: LoginService,private http: HttpClient) {}
+  constructor(private route: ActivatedRoute,private carsService: CarsService,private reservationsService: ReservationsService, private loginService: LoginService,private http: HttpClient,private router: Router) {}
   ngOnInit(): void {
     this.carId = Number(this.route.snapshot.paramMap.get('id'));
     this.car = this.carsService.getCarById(this.carId);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // start of the day 
+
+
+
     this.reservations$ = this.reservationsService.getReservations().pipe(
       tap(reservations => console.log('Reservations data:', reservations)),
       map((reservations: Reservation[]) =>
-        reservations.filter(r => r.carId.id === this.carId)
+        reservations.filter(r => r.carId.id === this.carId &&
+              new Date(r.endDate) >= today)
       )
     );
     this.userId = this.loginService.getUser()?.id;
@@ -100,8 +108,10 @@ export class RentComponent {
     endDate: formatDate(this.endDate!, 'yyyy-MM-dd', 'en-US'),
   };
 
-  this.http.post('http://localhost:8080/addReservation', request).subscribe({
+  this.http.post(environment.apiUrl + 'addReservation', request).subscribe({
     next: () => {
+      
+      this.router.navigate(['reservations/user', this.userId]);
       alert("Reservation created successfully!");
       // Optionally reset form or refresh reservations
     },

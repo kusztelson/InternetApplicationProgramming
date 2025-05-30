@@ -1,7 +1,6 @@
 package pl.lodz.p.iap.domain;
 
 import java.sql.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,5 +41,15 @@ public class Reservation {
         this.userId = userId;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public String toString() {
+        String msg = "";
+        msg += ("Id: " + this.id);
+        msg += (" Car Id: " + this.carId);
+        msg += (" User Id: " + this.userId);
+        msg += (" Start date: " + this.startDate);
+        msg += (" End date: " + this.endDate);
+        return msg;
     }
 }
