@@ -4,11 +4,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
-// import Reservation from './reservation';
-// import { ReservationsService } from './reservation.service';
 import { ReservationsService } from '../reservations/reservations.service';
 import { CommonModule } from '@angular/common';
 import { Car } from '../cars/car.model';
+import { RentUser } from './rentUser.model';
 
 
 @Component({
@@ -21,6 +20,7 @@ import { Car } from '../cars/car.model';
 
 export class ReservationComponent {
   @Input() car!: Car
+  @Input() rentUser!: RentUser
   @Input() reservationId!: number;
   @Input() reservationStartDate!: string;
   @Input() reservationEndDate!: string;

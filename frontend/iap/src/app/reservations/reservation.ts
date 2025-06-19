@@ -1,11 +1,12 @@
 import { Car } from "../cars/car.model";
+import { RentUser } from "../reservation/rentUser.model";
 
 export default interface Reservation {
     id: number;
 
 	carId: Car;
 
-	// RentUser userId;
+	userId: RentUser;
 
 	startDate: string;
 
