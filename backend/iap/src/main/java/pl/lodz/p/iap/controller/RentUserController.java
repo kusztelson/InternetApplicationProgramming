@@ -24,7 +24,7 @@ public class RentUserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/rentUser/{rentUserId}")
+    @RequestMapping(value = "/rentUser/{rentUserId}", method = RequestMethod.GET)
     public RentUser showRentUser(HttpServletRequest request, @PathVariable("rentUserId") Long rentUserId) {
         RentUser foundRentUser = null;
         foundRentUser = userService.getUser(rentUserId);
@@ -37,7 +37,7 @@ public class RentUserController {
         return foundRentUser;
     }
 
-    @RequestMapping(value = "/rentUsers")
+    @RequestMapping(value = "/rentUsers", method = RequestMethod.GET)
     public List<RentUser> showRentUsers(HttpServletRequest request) {
         List<RentUser> RentUserList = userService.listUser();
         return RentUserList;
@@ -69,12 +69,12 @@ public class RentUserController {
         return rentUser;
     }
 
-    @RequestMapping(value = "/rentUsers/delete/{rentUserId}")
+    @RequestMapping(value = "/rentUsers/delete/{rentUserId}", method = RequestMethod.DELETE)
     public void deleteRentUser(@PathVariable("rentUserId") Long rentUserId) {
         userService.deleteUser(rentUserId);
     }
 
-    @RequestMapping(value = "/rentUser/login/{login}")
+    @RequestMapping(value = "/rentUser/login/{login}", method = RequestMethod.GET)
     public RentUser getUserByLogin(@PathVariable("login") String login) {
         RentUser rentUser = this.userService.getUserByLogin(login);
 

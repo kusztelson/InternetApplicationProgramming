@@ -40,6 +40,8 @@ public class SecurityConfig {
                 authorizeRequests
                     .requestMatchers("/hello").hasRole("USER")
                     .requestMatchers("/h2-console/**").permitAll()  // Allow everyone to access /h2-console
+                    .requestMatchers("/swagger-ui/**").permitAll() // Allow everyone to access swagger 
+                    .requestMatchers("/v3/api-docs*/**").permitAll() // Allow everyone to access spring API
                     .requestMatchers("/favicon.ico").permitAll()
                     .requestMatchers("/rentUsers").permitAll()
                     .requestMatchers("/rentUser/**").permitAll()

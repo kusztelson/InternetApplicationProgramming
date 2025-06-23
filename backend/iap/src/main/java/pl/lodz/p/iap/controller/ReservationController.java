@@ -28,7 +28,7 @@ public class ReservationController {
         this.propertyHandler = propertyHandler;
     }
 
-    @RequestMapping(value = "/reservation/{reservationId}")
+    @RequestMapping(value = "/reservation/{reservationId}", method = RequestMethod.GET)
     public Reservation showReservation(HttpServletRequest request, @PathVariable("reservationId") Long reservationId) {
         Reservation foundReservation = null;
         foundReservation = reservationService.getReservation(reservationId);
@@ -41,13 +41,13 @@ public class ReservationController {
         return foundReservation;
     }
 
-    @RequestMapping(value = "/reservations")
+    @RequestMapping(value = "/reservations", method = RequestMethod.GET)
     public List<Reservation> showReservations(HttpServletRequest request) {
         List<Reservation> ReservationList = reservationService.listReservation();
         return ReservationList;
     }
 
-    @RequestMapping(value = "/reservations/user/{userId}")
+    @RequestMapping(value = "/reservations/user/{userId}", method = RequestMethod.GET)
     public List<Reservation> getReservationsForUser(@PathVariable Long userId) {
         return reservationService.getReservationsForUser(userId);
     }
@@ -58,7 +58,7 @@ public class ReservationController {
         return newReservation;
     }
 
-    @RequestMapping(value = "/reservations/delete/{reservationId}")
+    @RequestMapping(value = "/reservations/delete/{reservationId}", method = RequestMethod.DELETE)
     public void deleteReservation(@PathVariable("reservationId") Long reservationId) {
         reservationService.deleteReservation(reservationId);
     }

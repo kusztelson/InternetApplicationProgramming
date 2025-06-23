@@ -27,7 +27,7 @@ public class CarController {
         this.carService = carService;
     }
 
-    @RequestMapping(value = "/car/{carId}")
+    @RequestMapping(value = "/car/{carId}", method = RequestMethod.GET)
     public Car showCar(@PathVariable("carId") Long carId) {
         Car foundCar = null;
         foundCar = carService.getCar(carId);
@@ -40,7 +40,7 @@ public class CarController {
         return foundCar;
     }
 
-    @RequestMapping(value = "/cars")
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public List<Car> showCars(HttpServletRequest request) {
         List<Car> CarList = carService.listCar();
         return CarList;
@@ -71,7 +71,7 @@ public class CarController {
         return car;
     }
 
-    @RequestMapping(value = "/cars/delete/{carId}")
+    @RequestMapping(value = "/cars/delete/{carId}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("carId") Long carId) {
         carService.deleteCar(carId);
     }
